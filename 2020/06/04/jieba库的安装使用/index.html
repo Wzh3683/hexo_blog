@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,13 @@
 
   <!-- 页面元数据 -->
   
-    <title>Archive: 2020/5 - WZH的博客</title>
+    <title>&#39;jieba库的安装使用&#39; - WZH的博客</title>
   
+    <meta name="keywords" content="python">
+  
+  
+    <meta name="description" content="jieba库的安装
+1pip install jieba">
   
 
   <!-- feed -->
@@ -70,95 +73,7 @@
 
 <body>
   
-  <div class="cover-wrapper">
-    
-      <cover class='cover  half'>
-        <div class='cover-body'>
-  <div class='a'>
-    
-    
-      <p class="title">王增辉</p>
-    
-    
-      <p class="subtitle">懒洋洋是我大哥</p>
-    
-  </div>
-  <div class='b'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <ul class='cover-list-h'>
-        
-          
-            <li>
-              <a class="nav home"
-                href="https://volantis.js.org/v2/theme-settings/"
-                
-                
-                id="https:volantisjsorgv2theme-settings">
-                <i class='fas fa-book fa-fw'></i>文档
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://volantis.js.org/archives/"
-                
-                
-                id="https:volantisjsorgarchives">
-                <i class='fas fa-rss fa-fw'></i>博文
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://volantis.js.org/examples/"
-                
-                
-                id="https:volantisjsorgexamples">
-                <i class='fas fa-play-circle fa-fw'></i>示例
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://github.com/xaoxuu/hexo-theme-volantis/"
-                
-                  rel="external nofollow noopener noreferrer"
-                
-                
-                  target="_blank"
-                
-                id="https:githubcomxaoxuuhexo-theme-volantis">
-                <i class='fas fa-file-code fa-fw'></i>源码
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://volantis.js.org/contributors/"
-                
-                
-                id="https:volantisjsorgcontributors">
-                <i class='fas fa-handshake fa-fw'></i>鸣谢
-              </a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-</div>
-
-      </cover>
-    
-    <div id="loading-bar-wrapper">
+  <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -454,30 +369,18 @@
 
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -487,11 +390,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/05/31/git/">
-      git
+  <h1 class="title">
+    <a href="/2020/06/04/jieba%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
+      'jieba库的安装使用'
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -519,7 +422,22 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 31, 2020</p>
+    <p>发布于：Jun 4, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-04T11:07:58+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 4, 2020</p>
   </a>
 </div>
 
@@ -530,21 +448,16 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>822 words</p>
+      <p>201 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>3 min</p>
+      <p>1 min</p>
     </a>
   </div>
 
-
-            
-          
-            
-              
 
             
           
@@ -557,103 +470,53 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>工作中的注意事项：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注意：</span><br><span class="line">    在每天工作的第一件事就是先git pull拉取线上最新的版本。</span><br><span class="line">    每天下班前要做的就是git push，将本地代码提交到线上仓库。</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/05/31/git/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-	
-</div>
-<!-- 右策兰页 -->
-<aside class='l_side'>
-  
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>jieba库的安装</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jieba</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><img src="/img/python/jieba%E5%BA%93%E7%9A%84%E4%B8%8B%E8%BD%BD.png" alt="jieba库的安装"></p>
+<h3 id="jieba库的使用"><a href="#jieba库的使用" class="headerlink" title="jieba库的使用"></a>jieba库的使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> jieba.analyse</span><br><span class="line"></span><br><span class="line">data = <span class="string">"Python 是一种解释型、面向对象、动态数据类型的高级程序设计语言。"</span> \</span><br><span class="line">       <span class="string">"Python 由 Guido van Rossum 于 1989 年底发明，第一个公开发行版发行于 1991 年。"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#提取标签</span></span><br><span class="line"><span class="keyword">for</span> keyword,weight <span class="keyword">in</span> jieba.analyse.extract_tags(data,withWeight=<span class="literal">True</span>):</span><br><span class="line">    print(<span class="string">'%s:%s'</span> % (keyword,weight))</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出内容</span></span><br><span class="line"><span class="comment"># Building prefix dict from the default dictionary ...</span></span><br><span class="line"><span class="comment"># Loading model from cache C:\Users\10186\AppData\Local\Temp\jieba.cache</span></span><br><span class="line"><span class="comment"># Loading model cost 0.878 seconds.</span></span><br><span class="line"><span class="comment"># Prefix dict has been built successfully.</span></span><br><span class="line"><span class="comment"># Python:1.1385492859904762</span></span><br><span class="line"><span class="comment"># 数据类型:0.585297130452381</span></span><br><span class="line"><span class="comment"># Guido:0.5692746429952381</span></span><br><span class="line"><span class="comment"># van:0.5692746429952381</span></span><br><span class="line"><span class="comment"># Rossum:0.5692746429952381</span></span><br><span class="line"><span class="comment"># 1989:0.5692746429952381</span></span><br><span class="line"><span class="comment"># 1991:0.5692746429952381</span></span><br><span class="line"><span class="comment"># 发行版:0.5270221099</span></span><br><span class="line"><span class="comment"># 面向对象:0.5067895768571429</span></span><br><span class="line"><span class="comment"># 程序设计:0.44264321266619044</span></span><br><span class="line"><span class="comment"># 发明:0.31970364912190474</span></span><br><span class="line"><span class="comment"># 动态:0.3195238865542857</span></span><br><span class="line"><span class="comment"># 高级:0.3114256070914286</span></span><br><span class="line"><span class="comment"># 语言:0.29349988448285713</span></span><br><span class="line"><span class="comment"># 第一个:0.28425680430714284</span></span><br><span class="line"><span class="comment"># 解释:0.2720391527752381</span></span><br><span class="line"><span class="comment"># 年底:0.2701318006847619</span></span><br><span class="line"><span class="comment"># 公开:0.26735277138999997</span></span><br><span class="line"><span class="comment"># 发行:0.22793990734714284</span></span><br><span class="line"><span class="comment"># 一种:0.19674458076142856</span></span><br></pre></td></tr></table></figure>
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger blur desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='http://img0.imgtn.bdimg.com/it/u=137628589,3436980029&fm=26&gp=0.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">WZH的博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="/1018653578@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=http://www.okwzh.cn/2020/06/04/jieba%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/>http://www.okwzh.cn/2020/06/04/jieba%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</a></p>
           
         
-          
-            <a href="https://github.com/Wzh3683"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/playlist?id=590228449"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -664,29 +527,222 @@
     
     
 
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-04T11:07:58+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 4, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/python/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>python</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.okwzh.cn/2020/06/04/jieba%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/&title='jieba库的安装使用' - WZH的博客&summary=jieba库的安装
+1pip install jieba"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.okwzh.cn/2020/06/04/jieba%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/&title='jieba库的安装使用' - WZH的博客&summary=jieba库的安装
+1pip install jieba"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://www.okwzh.cn/2020/06/04/jieba%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/&title='jieba库的安装使用' - WZH的博客&summary=jieba库的安装
+1pip install jieba"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>201 words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>1 min</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/06/03/%E6%97%A0%E9%99%90%E6%9E%81%E5%88%86%E7%B1%BB/'>
+                <p class='title'>'无限极分类'<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>什么是无限极分类呢？
+无限极分类简单点说就是一个类可以分成多个子类，然后一个子类又可以分另外多个子类这样无限分下去，就好象windows可以新建一个文件夹，然后在这个文件夹里又可以建一些个文件夹...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: ''jieba库的安装使用'',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- 右策兰页 -->
+<aside class='l_side'>
+  
   
 
   
     
     
-  
 
-  <section class="widget tagcloud blur desktop mobile">
+
+  <section class="widget toc-wrapper blur desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <a href="/tags/celery/" style="font-size: 19px; color: #777">celery</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/vue/" style="font-size: 19px; color: #777">vue</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 19px; color: #777">算法</a>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#jieba库的使用"><span class="toc-text">jieba库的使用</span></a></li></ol>
     </div>
   </section>
 
-
-  
 
   
 
@@ -816,14 +872,6 @@
 
 <script>setLoadingBarProgress(80);</script>
 
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
-
-
       <script>setLoadingBarProgress(60);</script>
     </div>
     <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
@@ -936,6 +984,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "dogUA2FSKGTo029M1SEwGROT-MdYXbMMI",
+    appKey: "u0NdtQ8nvHoMdJPSYqm1LRxE",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
