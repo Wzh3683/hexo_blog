@@ -5325,3 +5325,10 @@ ul.list-v >li>a.active {
 .l_side .toc-wrapper:empty {
   display: none;
 }
+#修改卡片透明度,
+.widget {
+  background-color: rgba(255,255,255,0.9);
+}
+.post {
+  background-color: rgba(255,255,255,0.5);
+}
