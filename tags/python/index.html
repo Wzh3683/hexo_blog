@@ -442,6 +442,117 @@
         
           
   <h2 class="title">
+    <a href="/2020/06/16/%E7%BB%93%E5%90%88js%E5%81%9Amd5%E5%8A%A0%E5%AF%86/">
+      '结合js做md5加密'
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://www.okwzh.cn" rel="nofollow">
+    <img src="https://okwzh.cn/1.jpg">
+    <p>Mr. W</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Jun 16, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>513 words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>2 min</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不管在前端还是后端，我们都会有一些简单的业务对数据进行加密处理，用来防止信息等被盗取，所以我们这里来使用md5加密。</p>
+<h3 id="关于md5加密算法"><a href="#关于md5加密算法" class="headerlink" title="关于md5加密算法"></a>关于md5加密算法</h3><p>MD5信息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。这套算法的程序在 RFC 1321 标准中被加以规范。1996年后该算法被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如SHA-2。2004年，证实MD5算法无法防止碰撞（collision），因此不适用于安全性认证，如SSL公开密钥认证或是数字签名等用途。</p>
+<h3 id="md5依赖库"><a href="#md5依赖库" class="headerlink" title="md5依赖库"></a>md5依赖库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install js-md5</span><br><span class="line"></span><br><span class="line"><span class="comment"># "js-md5": "^0.7.3",</span></span><br></pre></td></tr></table></figure>
+
+<p>针对md5加密库，因为他不是热库，不需要经常被使用，所以不需要将它加入到main.js中。最好的结果是每次使用单独对他进行调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> md5 <span class="keyword">from</span> <span class="string">'js-md5'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="前端代码示例"><a href="#前端代码示例" class="headerlink" title="前端代码示例"></a>前端代码示例</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	&#123;&#123;total&#125;&#125;</span><br><span class="line">    <span class="comment">&lt;!-- 7b7a53e239400a13bd6be6c91c4f6c4e --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> md5 <span class="keyword">from</span> <span class="string">'js-md5'</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">  data () &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">        total:<span class="string">''</span>,</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="actionscript">  <span class="comment">//注册组件标签</span></span></span><br><span class="line">  components:&#123;</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="actionscript">  mounted:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> num = <span class="string">'2020'</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.total = md5(num)</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>打印结果:7b7a53e239400a13bd6be6c91c4f6c4e</p>
+<h3 id="后端代码示例"><a href="#后端代码示例" class="headerlink" title="后端代码示例"></a>后端代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="comment">#前端num</span></span><br><span class="line">num = <span class="string">'2020'</span></span><br><span class="line"><span class="comment">#前端传的sign</span></span><br><span class="line">sign = <span class="string">"7b7a53e239400a13bd6be6c91c4f6c4e"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#实例化</span></span><br><span class="line">md5 = hashlib.md5()</span><br><span class="line"><span class="comment">#组合要加密的字符串</span></span><br><span class="line">sign_str = num</span><br><span class="line"><span class="comment">#解码</span></span><br><span class="line">mysign = str(sign_str).encode(encoding=<span class="string">"utf-8"</span>)</span><br><span class="line"><span class="comment">#设置加密</span></span><br><span class="line">md5.update(mysign)</span><br><span class="line">mysign = md5.hexdigest()</span><br><span class="line"><span class="comment">#判断</span></span><br><span class="line">print(mysign)</span><br><span class="line"><span class="keyword">if</span> sign == mysign:</span><br><span class="line">	print(<span class="string">"签名一致"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print(<span class="string">"数据被篡改"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印结果：7b7a53e239400a13bd6be6c91c4f6c4e</span></span><br><span class="line"><span class="comment">#签名一致</span></span><br></pre></td></tr></table></figure>
+
+<p>针对需要保密的信息，使用md5进行加密一下简直不要太完美。</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2020/06/16/%E6%94%AF%E4%BB%98%E5%AE%9D%E8%AE%A2%E5%8D%95%E6%94%AF%E4%BB%98/">
       '支付宝订单支付'
     </a>
@@ -1393,111 +1504,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/06/02/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-      '设计模式之工厂模式'
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://www.okwzh.cn" rel="nofollow">
-    <img src="https://okwzh.cn/1.jpg">
-    <p>Mr. W</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 2, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>504 words</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>1 min</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>工厂模式是一个在软件开发中用来创建对象的设计模式。是一个在软件开发中用来创建对象的设计模式。</p>
-<p>工厂模式就是建立对象的类就是一个工厂，需要被建立的对象就是一个个产品；在工厂中加工的产品，使用产品的人不在乎产品是如何生产出来的。<br>从开发角度来说，<span class='p red'>有效降低了模块之间的耦合度</span>。</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/06/02/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1710,7 +1716,7 @@
 
 
     <div class='content'>
-      <a href="/tags/celery/" style="font-size: 16.5px; color: #888">celery</a> <a href="/tags/django/" style="font-size: 21.5px; color: #666">django</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2/" style="font-size: 14px; color: #999">hexo博客</a> <a href="/tags/id/" style="font-size: 14px; color: #999">id</a> <a href="/tags/js/" style="font-size: 14px; color: #999">js</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/vue/" style="font-size: 19px; color: #777">vue</a> <a href="/tags/%E5%8D%8F%E8%AE%AE/" style="font-size: 16.5px; color: #888">协议</a> <a href="/tags/%E5%8F%88%E6%8B%8D%E4%BA%91/" style="font-size: 16.5px; color: #888">又拍云</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 16.5px; color: #888">异步</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 14px; color: #999">状态码</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 19px; color: #777">算法</a> <a href="/tags/%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95/" style="font-size: 14px; color: #999">请求方法</a>
+      <a href="/tags/celery/" style="font-size: 16.5px; color: #888">celery</a> <a href="/tags/django/" style="font-size: 21.5px; color: #666">django</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2/" style="font-size: 14px; color: #999">hexo博客</a> <a href="/tags/id/" style="font-size: 14px; color: #999">id</a> <a href="/tags/js/" style="font-size: 16.5px; color: #888">js</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/vue/" style="font-size: 19px; color: #777">vue</a> <a href="/tags/%E5%8D%8F%E8%AE%AE/" style="font-size: 16.5px; color: #888">协议</a> <a href="/tags/%E5%8F%88%E6%8B%8D%E4%BA%91/" style="font-size: 16.5px; color: #888">又拍云</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 16.5px; color: #888">异步</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 14px; color: #999">状态码</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 19px; color: #777">算法</a> <a href="/tags/%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95/" style="font-size: 14px; color: #999">请求方法</a>
     </div>
   </section>
 
