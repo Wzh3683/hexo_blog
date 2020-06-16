@@ -463,7 +463,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>822 words</p>
+      <p>923 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -510,8 +510,7 @@
 
 <h3 id="根据ID反解析服务"><a href="#根据ID反解析服务" class="headerlink" title="根据ID反解析服务"></a>根据ID反解析服务</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> snowflake.client</span><br><span class="line"></span><br><span class="line">sid = snowflake.client.get_guid()</span><br><span class="line">print(sid)</span><br><span class="line"><span class="comment">#ID：4369838396760133633</span></span><br><span class="line">bid = bin(sid)</span><br><span class="line">print(bid)</span><br><span class="line"><span class="comment">#第一位是标识符，此后是41位的时间戳，紧接着10位的节点标识码，最后12位的递增序列，</span></span><br><span class="line"><span class="comment"># 从后面数12位是：000000000001，再数5位是：00001 这5位就是某个节点的存储标识，我们就二进制的00001转换为十进制</span></span><br><span class="line"><span class="comment">#0b11110010100100110010001101111010010100110000000001000000000001</span></span><br><span class="line">cid = bin(sid)[<span class="number">47</span>:<span class="number">52</span>]</span><br><span class="line">print(<span class="string">'存储节点'</span>,cid)</span><br><span class="line"><span class="comment">#存储节点 00001</span></span><br><span class="line">print(<span class="string">'反解析服务'</span>,int(cid,<span class="number">2</span>))</span><br><span class="line"><span class="comment">#反解析服务 1</span></span><br></pre></td></tr></table></figure>
 
-
-
+<h3 id="使用bigint存储"><a href="#使用bigint存储" class="headerlink" title="使用bigint存储"></a>使用bigint存储</h3><p>在使用好处显而易见，不仅全局唯一，并且有序按时间递增，同时占用空间少，生成的id仅仅是19位的整形数字，正好契合mysql的bigint数据类型，简直完美。<br>但是使用bigint有个bug，就是19位数字传到前端会发生关于js数字精度丢失问题。<br><a href="https://okwzh.cn/2020/06/14/%E5%85%B3%E4%BA%8Ejs%E6%95%B0%E5%AD%97%E8%BF%87%E9%95%BF%E5%87%BA%E7%8E%B0%E7%9A%84%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">关于精度丢失问题</a></p>
 
           
             <div class='article_footer'>
@@ -676,7 +675,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>822 words</p>
+      <p>923 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -696,6 +695,11 @@
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2020/06/16/%E6%94%AF%E4%BB%98%E5%AE%9D%E8%AE%A2%E5%8D%95%E6%94%AF%E4%BB%98/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>'支付宝订单支付'</p>
+                <p class='content'>现在所有的门户网站还是一下应用，都离不开第三方支付，我们今天讲一下第三方的支付接口也就是支付宝接口付款。支付宝支付采用了RSA加密签名的安全通信机制，开发者可以通过支付宝的公钥验证消息的来源，同...</p>
+              </a>
             
             
               <a class='next' href='/2020/06/14/%E5%85%B3%E4%BA%8Ejs%E6%95%B0%E5%AD%97%E8%BF%87%E9%95%BF%E5%87%BA%E7%8E%B0%E7%9A%84%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/'>
@@ -772,7 +776,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用snowflake生成ID"><span class="toc-text">为什么使用snowflake生成ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心思想"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优势"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺陷"><span class="toc-text">缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装库"><span class="toc-text">安装库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启服务"><span class="toc-text">开启服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务信息"><span class="toc-text">服务信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取ID"><span class="toc-text">获取ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#根据ID反解析服务"><span class="toc-text">根据ID反解析服务</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用snowflake生成ID"><span class="toc-text">为什么使用snowflake生成ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心思想"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优势"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺陷"><span class="toc-text">缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装库"><span class="toc-text">安装库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启服务"><span class="toc-text">开启服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务信息"><span class="toc-text">服务信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取ID"><span class="toc-text">获取ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#根据ID反解析服务"><span class="toc-text">根据ID反解析服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用bigint存储"><span class="toc-text">使用bigint存储</span></a></li></ol>
     </div>
   </section>
 
@@ -794,7 +798,7 @@
 
 
     <div class="content">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\python算法\" title="'python算法'" rel="bookmark">'python算法'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\递归算法\" title="'递归算法'" rel="bookmark">'递归算法'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-微博登录\" title="第三方登录-微博登录" rel="bookmark">第三方登录-微博登录</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\05\08\day13-django中间件\" title="'Django中间件'" rel="bookmark">'Django中间件'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\08\HTTP协议和HTTPS协议\" title="'HTTP协议和HTTPS协议'" rel="bookmark">'HTTP协议和HTTPS协议'</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\python算法\" title="'python算法'" rel="bookmark">'python算法'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\递归算法\" title="'递归算法'" rel="bookmark">'递归算法'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-微博登录\" title="第三方登录-微博登录" rel="bookmark">第三方登录-微博登录</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-钉钉登录\" title="'第三方登录-钉钉登录'" rel="bookmark">'第三方登录-钉钉登录'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\08\HTTP协议和HTTPS协议\" title="'HTTP协议和HTTPS协议'" rel="bookmark">'HTTP协议和HTTPS协议'</a></h3></div></li></ul>
     </div>
   </section>
 
