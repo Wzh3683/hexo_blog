@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html>
+  
+<head hexo-theme='https://volantis.js.org/#牛逼'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>&#39;paypal跨境支付&#39; - WZH的博客</title>
+  
+    <meta name="keywords" content="django,python,支付">
+  
+  
+    <meta name="description" content="在公司中，支付是必不可缺的的重要系统之一。有的公司如果涉及到境外支付，就一定听说过或使用说PayPal。PayPal支付的优势就是其业务网络遍布全球。目前PayPal的庞大网络覆盖了全球200多个国家，可提供20多种语言服务，并接受100多种货币付款和56种货币提现。同时，还允许在账户中持有25种货币余额。换句话...">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="WZH的博客">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur floatable">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            WZH <b><sup style='color:#3AA757'>牛逼</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=https://www.itrhx.com/box/
+                  
+                  
+                  
+                    id="https:wwwitrhxcombox"
+                  >
+                  <i class='fa fa-briefcase fa-fw'></i>百宝箱
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/comments/
+                  
+                  
+                  
+                    id="comments"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>留言板
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=https://www.itrhx.com/box/
+                  
+                  
+                  
+                    id="https:wwwitrhxcombox"
+                  >
+                  <i class='fa fa-briefcase fa-fw'></i>百宝箱
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/comments/
+                  
+                  
+                  
+                    id="comments"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>留言板
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/06/17/paypal%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/">
+      'paypal跨境支付'
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://www.okwzh.cn" rel="nofollow">
+    <img src="https://okwzh.cn/1.jpg">
+    <p>Mr. W</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E6%94%AF%E4%BB%98/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>支付</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Jun 17, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>1.4k words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>5 min</p>
+    </a>
+  </div>
+
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>在公司中，支付是必不可缺的的重要系统之一。有的公司如果涉及到境外支付，就一定听说过或使用说PayPal。<br>PayPal支付的优势就是其业务网络遍布全球。目前PayPal的庞大网络覆盖了全球200多个国家，可提供20多种语言服务，并接受100多种货币付款和56种货币提现。同时，还允许在账户中持有25种货币余额。换句话说，只要付款人拥有一个PayPal账户，他就拥有了在200多个国家进行电子支付购物，并在需要服务的时候享受到母语支持的各种便捷服务。</p>
+<a id="more"></a>
+
+
+<p>注册PayPal官网账号：<a href="https://www.paypal.com" target="_blank" rel="noopener">https://www.paypal.com</a><br>PayPal开发者平台：<a href="https://developer.paypal.com/developer/accounts/" target="_blank" rel="noopener">https://developer.paypal.com/developer/accounts/</a></p>
+<p>注册成功之后，进去PayPal沙盒应用：<a href="https://developer.paypal.com/developer/accounts/" target="_blank" rel="noopener">https://developer.paypal.com/developer/accounts/</a><br>然后PayPal会默认给我们创建两个账号，一个是商家的，一个是个户的。当然也可以点击Create account自己创建需要的账号<br><img src="/img/%E6%94%AF%E4%BB%98/%E9%BB%98%E8%AE%A4%E8%B4%A6%E5%8F%B7.png" alt="分配的默认账号"></p>
+<h3 id="支付业务"><a href="#支付业务" class="headerlink" title="支付业务"></a>支付业务</h3><p>以个人账户对商户进行支付业务。</p>
+<p>应用管理页面：<a href="https://developer.paypal.com/developer/applications/" target="_blank" rel="noopener">https://developer.paypal.com/developer/applications/</a></p>
+<p>这时我们可以发现他给我们默认分配了应用。<br><img src="/img/%E6%94%AF%E4%BB%98/%E9%BB%98%E8%AE%A4%E5%BA%94%E7%94%A8.png" alt="分配的默认应用"></p>
+<p>点击我们的默认应用，我们可以发现应用的client_id和client_secret。<br><img src="/img/%E6%94%AF%E4%BB%98/client_ID.png" alt="应用的ID和Secret"></p>
+<p>进入我们的账号设置<br><img src="/img/%E6%94%AF%E4%BB%98/%E8%BF%9B%E5%85%A5%E8%B4%A6%E5%8F%B7%E8%AE%BE%E7%BD%AE.png" alt="进入账号设置"></p>
+<p>可以得知我们的个人账号和账号密码<br><img src="/img/%E6%94%AF%E4%BB%98/%E4%B8%AA%E4%BA%BA%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81.png" alt="个人账号和面膜"></p>
+<p>修改我们个人账号的金额，让我们有足以的价格进行购买测试<br><img src="/img/%E6%94%AF%E4%BB%98/%E4%B8%AA%E4%BA%BA%E8%B4%A6%E6%88%B7%E9%87%91%E9%A2%9D.png" alt="修改个人账户金额"></p>
+<h3 id="进行购买测试"><a href="#进行购买测试" class="headerlink" title="进行购买测试"></a>进行购买测试</h3><p>安装PayPal在python的sdk</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install paypalrestsdk</span><br></pre></td></tr></table></figure>
+
+<p>在djagno中新建一个支付视图views.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">url:</span><br><span class="line">    path(<span class="string">'pay/'</span>,payment),<span class="comment">#跳转</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paypalrestsdk</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">payment</span><span class="params">(request)</span>:</span></span><br><span class="line">    paypalrestsdk.configure(&#123;</span><br><span class="line">  <span class="string">"mode"</span>: <span class="string">"sandbox"</span>, <span class="comment"># sandbox代表沙盒</span></span><br><span class="line">  <span class="string">"client_id"</span>: <span class="string">"你的client_id"</span>,</span><br><span class="line">  <span class="string">"client_secret"</span>: <span class="string">"你的client_secret"</span> &#125;)</span><br><span class="line"></span><br><span class="line">    payment = paypalrestsdk.Payment(&#123;</span><br><span class="line">        <span class="string">"intent"</span>: <span class="string">"sale"</span>,</span><br><span class="line">        <span class="string">"payer"</span>: &#123;</span><br><span class="line">            <span class="string">"payment_method"</span>: <span class="string">"paypal"</span>&#125;,</span><br><span class="line">        <span class="string">"redirect_urls"</span>: &#123;</span><br><span class="line">            <span class="string">"return_url"</span>: <span class="string">"http://localhost:8000/palpay/pay/"</span>,<span class="comment">#支付成功跳转页面</span></span><br><span class="line">            <span class="comment"># "return_url": "http://localhost:8000/palpay/pay/?"+'order='+str(snoworder)+'&amp;uid='+str(uid) #进行加参，到修改</span></span><br><span class="line">            <span class="string">"cancel_url"</span>: <span class="string">"http://localhost:3000/paypal/cancel/"</span>&#125;,<span class="comment">#取消支付页面</span></span><br><span class="line">        <span class="string">"transactions"</span>: [&#123;</span><br><span class="line">            <span class="string">"amount"</span>: &#123;</span><br><span class="line">                <span class="string">"total"</span>: <span class="string">"5.00"</span>,</span><br><span class="line">                <span class="string">"currency"</span>: <span class="string">"USD"</span>&#125;,</span><br><span class="line">            <span class="string">"description"</span>: <span class="string">"这是一个订单测试"</span>&#125;]&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> payment.create():</span><br><span class="line">        print(<span class="string">"Payment created successfully"</span>)</span><br><span class="line">        <span class="keyword">for</span> link <span class="keyword">in</span> payment.links:</span><br><span class="line">            <span class="keyword">if</span> link.rel == <span class="string">"approval_url"</span>:</span><br><span class="line">                approval_url = str(link.href)</span><br><span class="line">                print(<span class="string">"Redirect for approval: %s"</span> % (approval_url))</span><br><span class="line">                <span class="keyword">return</span> redirect(approval_url)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(payment.error)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"支付失败"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里解释一下重点参数，return_url是支付成功后回调的页面，paypal会将一个支付者id回传，然后服务端需要验证支付才能真的完成支付，total是付款金额，精确到分，currency是币种，支持多钟类型的货币。</p>
+<p>当Django的服务端创建好支付订单后，重定向到paypal的沙盒环境，这时候一定要使用沙盒的个人账号进行登录和支付。<br><img src="/img/%E6%94%AF%E4%BB%98/%E4%BB%98%E6%AC%BE.png" alt="paypal支付订单"><br>支付完成后，会跳回刚刚传过去的回调页面：<a href="http://localhost:8000/palpay/pay/?paymentId=PAYID-L3SYORA3C031930S1733650J&amp;token=EC-9TG269735K620131N&amp;PayerID=ETYYRCDN8C3XJ" target="_blank" rel="noopener">http://localhost:8000/palpay/pay/?paymentId=PAYID-L3SYORA3C031930S1733650J&amp;token=EC-9TG269735K620131N&amp;PayerID=ETYYRCDN8C3XJ</a>  </p>
+<p>这里paypal会传过来三个参数，支付id,token和支付者id,然后因为我要修改参数，所以我对回调网址进行加参，</p>
+<p>此时，在回调方法里，我们需要通过支付者id进行确认验证支付</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">url:</span><br><span class="line">    path(<span class="string">'palpay/pay/'</span>,payment_execute),<span class="comment">#成功回调</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">payment_execute</span><span class="params">(request)</span>:</span></span><br><span class="line">    paymentid = request.GET.get(<span class="string">"paymentId"</span>) <span class="comment">#支付id</span></span><br><span class="line">    payerid = request.GET.get(<span class="string">"PayerID"</span>)  <span class="comment">#支付者id</span></span><br><span class="line">    order = request.GET.get(<span class="string">'order'</span>) <span class="comment">#获取订单</span></span><br><span class="line">    uid = request.GET.get(<span class="string">'uid'</span>)<span class="comment">#获取用户id</span></span><br><span class="line">    print(<span class="string">'订单ID:%s,支付者ID:%s，雪花订单号:%s,uid:%s'</span>%(paymentid,payerid,order,uid))</span><br><span class="line"></span><br><span class="line">    payment = paypalrestsdk.Payment.find(paymentid)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> payment.execute(&#123;<span class="string">"payer_id"</span>: payerid&#125;):</span><br><span class="line">        <span class="keyword">if</span> order <span class="keyword">and</span> payerid <span class="keyword">and</span> paymentid:</span><br><span class="line">            order_end = int(order[<span class="number">-1</span>])</span><br><span class="line">            print(<span class="string">'订单号最后一位'</span>,order_end)</span><br><span class="line">            <span class="keyword">if</span> int(order_end) &lt; <span class="number">5</span> <span class="keyword">or</span> int(uid[<span class="number">-1</span>]) &lt; <span class="number">5</span>:</span><br><span class="line">                order = OrderOne.objects.filter(order=order).first()</span><br><span class="line">                order.status = <span class="number">2</span></span><br><span class="line">                order.save()</span><br><span class="line">                print(<span class="string">"修改一表订单状态成功"</span>)</span><br><span class="line">                <span class="keyword">return</span> redirect(<span class="string">'http://localhost:8080/myorder/'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                order = OrderTwo.objects.filter(order=order).first()</span><br><span class="line">                order.status = <span class="number">2</span></span><br><span class="line">                order.save()</span><br><span class="line">                print(<span class="string">"修改二表订单状态成功"</span>)</span><br><span class="line">                <span class="keyword">return</span> redirect(<span class="string">'http://localhost:8080/myorder/'</span>)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">'未获取到单号，请重新购买'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(payment.error) <span class="comment"># Error Hash</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">"支付失败"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这时再看我们的个人账户页面，发现已经扣款成功，说明整个流程已经走完。<br><img src="/img/%E6%94%AF%E4%BB%98/%E8%B4%AD%E4%B9%B0%E4%B9%8B%E5%90%8E%E4%BB%B7%E6%A0%BC.png" alt="购买成功扣款"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>整个支付流程相对支付宝来说，更加的紧凑，但是做支付安全是第一要务，就个人体验（仅是个人体验）层面来说，支付宝在安全方面做的还是要比Paypal略强一些，起码在信用卡欺诈和盗刷方面风控做的更好，在风险保障和赔付方面都有提供保险，当然由于金融环境的差异较大，并不是说Paypal的风控做的不好，只是机制不同，在国外，如果持卡人的信用卡被盗刷，一般发卡组织会让商家去承担责任，而国内只能在交易环节设置更多的验证，本质上说是要持卡人承担责任。这也是为什么支付宝的风控看起来更好的原因。</p>
+<p>最后就是关于费率问题，Paypal官方给出的费率是每笔交易收取3.9%+$0.3（根据你的交易流水，比例可以优惠，具体下限看接入者的月营业额度），不过这可是美刀，不得不说这个费率是相当的高，但是国内做境外支付的电商，一般还是要接入Paypal作为支付方式。支付宝的费率基本上在1.2%左右，具体的费率也看交易流水，有实力的下限可以做到基本没有，单纯的看费率似乎支付宝更有优势，但是别忘记了，这样对比是不科学的，因为凡是接入Paypal的都是看中覆盖外币业务的地区，费率则是投资人该考虑的问题了。</p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=http://www.okwzh.cn/2020/06/17/paypal%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/>http://www.okwzh.cn/2020/06/17/paypal%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='http://okwzh.cn/img/微信收款码.jpg'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='http://okwzh.cn/img/支付宝收款码.jpg'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/django/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/python/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>python</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%94%AF%E4%BB%98/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>支付</p></a></div>
+
+
+        
+      
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.okwzh.cn/2020/06/17/paypal%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/&title='paypal跨境支付' - WZH的博客&summary=在公司中，支付是必不可缺的的重要系统之一。有的公司如果涉及到境外支付，就一定听说过或使用说PayPal。PayPal支付的优势就是其业务网络遍布全球。目前PayPal的庞大网络覆盖了全球200多个国家，可提供20多种语言服务，并接受100多种货币付款和56种货币提现。同时，还允许在账户中持有25种货币余额。换句话说，只要付款人拥有一个PayPal账户，他就拥有了在200多个国家进行电子支付购物，并在需要服务的时候享受到母语支持的各种便捷服务。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.okwzh.cn/2020/06/17/paypal%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/&title='paypal跨境支付' - WZH的博客&summary=在公司中，支付是必不可缺的的重要系统之一。有的公司如果涉及到境外支付，就一定听说过或使用说PayPal。PayPal支付的优势就是其业务网络遍布全球。目前PayPal的庞大网络覆盖了全球200多个国家，可提供20多种语言服务，并接受100多种货币付款和56种货币提现。同时，还允许在账户中持有25种货币余额。换句话说，只要付款人拥有一个PayPal账户，他就拥有了在200多个国家进行电子支付购物，并在需要服务的时候享受到母语支持的各种便捷服务。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://www.okwzh.cn/2020/06/17/paypal%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/&title='paypal跨境支付' - WZH的博客&summary=在公司中，支付是必不可缺的的重要系统之一。有的公司如果涉及到境外支付，就一定听说过或使用说PayPal。PayPal支付的优势就是其业务网络遍布全球。目前PayPal的庞大网络覆盖了全球200多个国家，可提供20多种语言服务，并接受100多种货币付款和56种货币提现。同时，还允许在账户中持有25种货币余额。换句话说，只要付款人拥有一个PayPal账户，他就拥有了在200多个国家进行电子支付购物，并在需要服务的时候享受到母语支持的各种便捷服务。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a><img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/wechat.png"></a>
+          <div class='target'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAAE4CAAAAADqFLC2AAADvklEQVR42u3ayW4jMQwFwP7/n07uExjiJpselG4OehFLlxeynx+rtB4E4MCBA2eBA7cE7imuf+//84LDda9+n953uv5YeLdecODAgQMHDhy4ZXDhAHgo+HR9tvAqaHT/6XrBgQMHDhw4cOCWwlUD7wlyKijfel/0OeDAgQMHDhw4cP8LXDbAZgsHBw4cOHDgwIEDdzcATzdEu43K6sGDAwcOHDhw4MB9K1y24Ft/jwbgbBBeM8kHBw4cOHDgwIEbgsuu6kB5y+9yveDAgQMHDhw4cEvguiv6wu5Auzqo/hle4MCBAwcOHDhwW+CiG4sG4WrjsdvAnP57+D8HcODAgQMHDhy4D8FVG4LZAXL3edmGZDYQh/cHDhw4cODAgQO3BG5qYHu7sKkDy94PDhw4cODAgQO3HS4aAKOFdAfDtwbU7aAMDhw4cODAgQO3DK7bYOzCTR/cdHAHBw4cOHDgwIHbCpcd2E4PqrMHeHuQHR5IgwMHDhw4cODAfRguHACTQbV6fbZhOdUwPb4HHDhw4MCBAwduCVy34GoDM/1BX7DAbpA+Ph8cOHDgwIEDB24ZXPXDu26A7j6/G5CjdYMDBw4cOHDgwG2DywbbbrDM3t89qO7+wl9kggMHDhw4cODAvRku21jMfijYbYBWG5NPcKWDNjhw4MCBAwcO3BK47qA3u8Eo9NRAuxqY219kggMHDhw4cODAvRluKmhmG4XRQXM1IFcbm+UOMDhw4MCBAwcO3DK4bNDsNkCjoNOD75fPAwcOHDhw4MCBWwKXhWkPdIsHVS506H3gwIEDBw4cOHDb4LIf/nUblFmA6Q8Lu/eBAwcOHDhw4MBtgesG3eqgN/ve6H3TDVdw4MCBAwcOHLhvgYtuLBpcs4G4CjkVeI9/BwcOHDhw4MCBWwZXDYa3GpW3BtDdgwIHDhw4cODAgdsCNzXw7Q6qs4VnG6XVRmt4kg8OHDhw4MCBA/dmuCxQNUhOQ2Wfn63jpQ84cODAgQMHDtxSuGqQjG54KtBWg3u38QkOHDhw4MCBA7cF7imubEOzCpcN0NXf4eeDAwcOHDhw4MAtg+sGz2ggzQbo7iD5egAGBw4cOHDgwIFbAjc1QJ4KutX7rw+kwYEDBw4cOHDgvhzudmMxGminGqFvC8DgwIEDBw4cOHDL4LLXZRuP2X1ODdTBgQMHDhw4cOC2w2UH0lmY6oC7C1kN5ODAgQMHDhw4cNvhqgPhagMxC5E90G5jM9zIBAcOHDhw4MCB+xCclVvgwIEDB84CB+7D6xcLWXkP0DLT8AAAAABJRU5ErkJggg==">
+          </div>
+        </div>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>1.4k words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>5 min</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/06/17/hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%BA%8C/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>'hexo博客美化二'</p>
+                <p class='content'>前面已经讲过hexo博客的美化，这是继续更新的。
+
+
+1.添加背景音乐打开网页版网易云音乐，选择你准备添加的背景音乐，点击生成外链播放器，前提是要有版权，不然是无法生成外链播放器的，复制底下的H...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/06/16/hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%B8%80/'>
+                <p class='title'>'hexo博客美化一'<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>本文讲述的是添加博客美化的样式请注意：不同主题可能方法有些不同，相同主题不同版本，配置方法也有所差异！
+博客美化前提条件：有一定的前端基础，了解 HTML、CSS、JS，了解 CSS 预处理语言...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: ''paypal跨境支付'',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- 右策兰页 -->
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper blur desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#支付业务"><span class="toc-text">支付业务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进行购买测试"><span class="toc-text">进行购买测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts blur desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\16\支付宝订单支付\" title="'支付宝订单支付'" rel="bookmark">'支付宝订单支付'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-微博登录\" title="第三方登录-微博登录" rel="bookmark">第三方登录-微博登录</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-钉钉登录\" title="'第三方登录-钉钉登录'" rel="bookmark">'第三方登录-钉钉登录'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\05\08\day13-django中间件\" title="'Django中间件'" rel="bookmark">'Django中间件'</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+  
+</aside>
+
+
+  
+  
+  <footer class="clearfix">
+    <br><br>
+    <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409650841&auto=1&height=66"></iframe> -->
+    <!-- 背景音乐 -->
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#007FFF'
+      autoplay='autoplay'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='xiami'
+      type='playlist'
+      id='1193563910'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+      <br>
+        <br>
+        <!-- ############## 四个网址 ################## -->
+        <!-- <div class="social-wrapper">
+          
+            
+            
+              <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1018653578&amp;site=qq&amp;menu=yes"
+                class="social fab fa-qq flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="mailto:1018653578@qq.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="https://github.com/Wzh3683"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="https://music.163.com/#/playlist?id=590228449"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div> -->
+        <!-- 网站运行时间 -->
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        <script>
+            var now = new Date(); 
+            function createtime() { 
+                var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                now.setTime(now.getTime()+250); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+            } 
+        setInterval("createtime()",250);
+        </script>
+      
+    
+      
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://volantis.js.org/" target="_blank" class="codename">WZH</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+          <!-- ############# Copyright © 2017-2020 Mr. W ############# -->
+        <p><a href="http://okwzh.cn" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. W</a></p>
+
+        </div>
+      
+    
+      
+        
+      
+    
+  </footer>
+
+
+
+
+<script>setLoadingBarProgress(80);</script>
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://i.loli.net/2020/06/14/7ByVIonvhLY4wD5.png", "https://i.loli.net/2020/06/14/ZavlF8PD92cR6VY.jpg", "https://i.loli.net/2020/06/14/3QqPzTfJ56aEOsY.jpg", "https://i.loli.net/2020/06/14/CiNtd3sGD5vpRnO.jpg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "8000",
+            fade: "1300"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "8000",
+            fade: "1300"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "NXH07QqogzUxgT3WQU064j9D-gzGzoHsz",
+    appKey: "f5oGTt9f5pG96B9r6uTngiGh",
+    placeholder: "畅所欲言吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="/js/FunnyTitle.js"></script>
+<!-- 数字雨 -->
+<!-- <canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script> -->
+<!-- 点击显示爆炸效果 -->
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+<!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!-- 小地球仪 -->
+<!-- <script type="text/javascript" src="//rf.revolvermaps.com/0/0/2.js?i=5jygvgz9nkm&amp;m=3&amp;s=120&amp;c=baff00&amp;t=1" async="async"></script> -->
