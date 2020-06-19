@@ -6,8 +6,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -19,8 +17,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Tag: 请求方法 - WZH的博客</title>
+    <title>&#39;关于celery不执行定时任务的问题&#39; - WZH的博客</title>
   
+    <meta name="keywords" content="python,django,celery">
+  
+  
+    <meta name="description" content="使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。">
   
 
   <!-- feed -->
@@ -397,25 +399,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -425,11 +414,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/06/08/%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81/">
-      '响应状态码和请求方法'
+  <h1 class="title">
+    <a href="/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/">
+      '关于celery不执行定时任务的问题'
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -452,9 +441,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E5%8D%8F%E8%AE%AE/' rel="nofollow">
+    <a href='/categories/celery/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>协议</p>
+      <p>celery</p>
     </a>
   </div>
 
@@ -465,7 +454,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 8, 2020</p>
+    <p>发布于：Jun 19, 2020</p>
   </a>
 </div>
 
@@ -473,24 +462,26 @@
           
             
               
+
+            
+          
+            
+          
+            
+              
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>710 words</p>
+      <p>411 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>2 min</p>
+      <p>1 min</p>
     </a>
   </div>
 
-
-            
-          
-            
-              
 
             
           
@@ -503,154 +494,63 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="状态码分类-HTTP-Status-Code"><a href="#状态码分类-HTTP-Status-Code" class="headerlink" title="状态码分类(HTTP Status Code)"></a>状态码分类(HTTP Status Code)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1XX- 信息型，服务器收到请求，需要请求者继续操作。</span><br><span class="line">2XX- 成功型，请求成功收到，理解并处理。</span><br><span class="line">3XX - 重定向，需要进一步的操作以完成请求。</span><br><span class="line">4XX - 客户端错误，请求包含语法错误或无法完成请求。</span><br><span class="line">5XX - 服务器错误，服务器在处理请求的过程中发生了错误。</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/06/08/%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。</p>
+<a id="more"></a>
+<h3 id="celery定时任务bug"><a href="#celery定时任务bug" class="headerlink" title="celery定时任务bug"></a>celery定时任务bug</h3><p>就是简单做celery定时任务时，我发现逻辑和代码并没有任何问题，但是就是不启动。<br>于是进行百度，刚开始说的是可能是celery版本的问题，但是发现并不是这个问题。</p>
+<p>经过测试，我把crontab中的参数hour去掉，把minute设置每分钟，于是我发现每分钟都会执行。<br>所以可以确定是hour，也就是时区问题。但是机器上的时间和代码里面的时区都没有问题，那可能是celery本身的问题了。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>默认celery的时区为UTC</p>
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>将celery定时任务设置为根据本地时区触发</p>
+<p>默认celery的时区为UTC，如果要在django项目中将celery定时任务配置为根据本地时区触发，则需要修改</p>
+<p>在settings.py中添加以下代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CELERY_TIMEZONE=<span class="string">'Asia/Shanghai'</span></span><br><span class="line">CELERY_ENABLE_UTC=<span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
 
-    
-  
-</div>
-<!-- 右策兰页 -->
-<aside class='l_side'>
-  
+
+<figure class="highlight python"><figcaption><span>定时任务代码附上</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定时任务</span></span><br><span class="line"><span class="comment">#导入celery定时模块</span></span><br><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> schedules</span><br><span class="line"><span class="comment">#导入时间模块</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CELERY_TIMEZONE=<span class="string">'Asia/Shanghai'</span></span><br><span class="line">CELERY_ENABLE_UTC=<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CELERY_BEAT_SCHEDULE = &#123;</span></span><br><span class="line"><span class="comment">#     #定义定时任务</span></span><br><span class="line"><span class="comment">#     'celery_datetime_work':&#123;</span></span><br><span class="line"><span class="comment">#         'task':'myapp.tasks.async_test',   #任务名称</span></span><br><span class="line"><span class="comment">#         'schedule':timedelta(seconds=60)</span></span><br><span class="line"><span class="comment">#     &#125;</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"></span><br><span class="line">CELERY_BEAT_SCHEDULE = &#123;</span><br><span class="line">    <span class="comment">#定义定时任务</span></span><br><span class="line">    <span class="string">'celery_datetime_work'</span>:&#123;</span><br><span class="line">        <span class="comment">#天气预报结合钉钉机器人</span></span><br><span class="line">        <span class="string">'task'</span>: <span class="string">'myapp.tasks.func'</span>, <span class="comment">#我的celery任务</span></span><br><span class="line">        <span class="comment">#定时任务每天8.30</span></span><br><span class="line">        <span class="string">'schedule'</span>: crontab(minute=<span class="string">'30'</span>,hour=<span class="number">8</span>),</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger blur desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://okwzh.cn/1.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>风也温柔</h2>
-        
-        
-        
-          <p><span id="jinrishici-sentence"><div id="binft"></div>
-            <script>
-              var binft = function (r) {
-                function t() {
-                  return b[Math.floor(Math.random() * b.length)]
-                }  
-                function e() {
-                  return String.fromCharCode(94 * Math.random() + 33)
-                }
-                function n(r) {
-                  for (var n = document.createDocumentFragment(), i = 0; r > i; i++) {
-                    var l = document.createElement("span");
-                    l.textContent = e(), l.style.color = t(), n.appendChild(l)
-                  }
-                  return n
-                }
-                function i() {
-                  var t = o[c.skillI];
-                  c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d)
-                }
-                var l = "",
-                o = ["云想衣裳花想容，春风拂槛露华浓。", "若非群玉山头见，会向瑶台月下逢","巧笑倩兮，美目盼兮，素以为绚兮。", "身无彩凤双飞翼，心有灵犀一点通。","青青子衿，悠悠我心。","桃之夭夭，灼灼其华。","醉后不知天在水，满船清梦压星河。","玲珑骰子安红豆，入骨相思知不知。"].map(function (r) {
-                return r + ""
-                }),
-                a = 2,
-                g = 1,
-                s = 5,
-                d = 75,
-                b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"],
-                c = {
-                  text: "",
-                  prefixP: -s,
-                  skillI: 0,
-                  skillP: 0,
-                  direction: "forward",
-                  delay: a,
-                  step: g
-                };
-                i()
-                };
-                binft(document.getElementById('binft'));
-            </script></span></p>
-          <!-- <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="http://wpa.qq.com/msgrd?v=3&uin=1018653578&site=qq&menu=yes"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=http://www.okwzh.cn/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/>http://www.okwzh.cn/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/</a></p>
           
         
-          
-            <a href="mailto:1018653578@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/Wzh3683"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/playlist?id=590228449"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -660,61 +560,218 @@
   
     
     
+
+<section class="widget qrcode  desktop mobile">
   
 
-  <section class="widget category blur desktop">
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='http://okwzh.cn/img/微信收款码.jpg'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='http://okwzh.cn/img/支付宝收款码.jpg'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/python/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>python</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/django/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/celery/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>celery</p></a></div>
+
+
+        
+      
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.okwzh.cn/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/&title='关于celery不执行定时任务的问题' - WZH的博客&summary=使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.okwzh.cn/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/&title='关于celery不执行定时任务的问题' - WZH的博客&summary=使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://www.okwzh.cn/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/&title='关于celery不执行定时任务的问题' - WZH的博客&summary=使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a><img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/wechat.png"></a>
+          <div class='target'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbgAAAG4CAAAAAASoa1vAAAGzUlEQVR42u3aQXbcOBAD0L7/pT0n6CcWCkwm1ufOSVsi+ekFiP78GP/k+NgCcAY4Axw4A5wB7vVwn3A8vuDw898+9/Te089Pf2+9scP1TvcbHDhw4MCBAwcOHDhw4KYT/vb50w172sh0Xul7tgdlemC3+w0OHDhw4MCBAwcOHDhwreC7DaLThbWC9PbATde/3m9w4MCBAwcOHDhw4MCBKxeYKeCt56ew6b5MDzo4cODAgQMHDhw4cODA/W24tGjdLvRptC4M0nWBAwcOHDhw4MCBAwcO3C24VjDdFo1pwE2Ddxqw0/fE+w0OHDhw4MCBAwcOHDhw5UDr58sXCODA+RkcOHDgwIHzM7jXw21HWlSmAbwVeKcbfhrYp88Z7zc4cODAgQMHDhw4cOBeD9cqRtPCcAu0DbSn82sBbecHDhw4cODAgQMHDhw4cKcBOA3K24WdLnw6v+2FwHRetYsCcODAgQMHDhw4cODAgSsH5GlgbRWi7WL0VjG7PtjgwIEDBw4cOHDgwIF7PVyrgNwWie3icXpw0ouG9LlpEQ0OHDhw4MCBAwcOHDhw00DZKgzbBed2w7YXBNtC+PjAgQMHDhw4cODAgQMHDly5wNwWi2nQTf+/BdcGBgcOHDhw4MCBAwcOHLgnuGlBeSsQbzc6PXDtAjQ9GI/7Dw4cOHDgwIEDBw4cOHBhwN4WiWmB2oZOfz/997TYBQcOHDhw4MCBAwcOHLjTX9gWm6eBflwoDg/W9iLg9nuO9wMcOHDgwIEDBw4cOHCvh/sMx3SirYDdKn6382kVyHFhDQ4cOHDgwIEDBw4cOHClL6z+qSDeLlK3MOnBSA8QOHDgwIEDBw4cOHDgwKXBsxXAWwE2vSA4Dr7hAdzu62ORCg4cOHDgwIEDBw4cuNfCpYXluAgcPm8adNMitTW/9AAezw8cOHDgwIEDBw4cOHCvh5sGzNuBtP3+dvHaKlLjgwIOHDhw4MCBAwcOHDhw5eLz/xqUpxcE7aK4VtSCAwcOHDhw4MCBAwcO3OEEp59vF663Avv0/Wkw3+4nOHDgwIEDBw4cOHDgwKUT2Y50Aa15/gxHejEwnefx88GBAwcOHDhw4MCBAwfucgBOi8RbhWm72NwG8fH+gQMHDhw4cODAgQMHDtwwCKaBtPX8KcSt4H/6vO3BeQzg4MCBAwcOHDhw4MCBez1cGiDTYDmd+PRzrUI3DeppAAcHDhw4cODAgQMHDhy4b3DpxFrQraA6nde26Lw1v8d5gwMHDhw4cODAgQMH7vVw0+JyusBWYTk9KNtitLUP24MBDhw4cODAgQMHDhw4cGkAT1803bD08+2CNS1Gb68PHDhw4MCBAwcOHDhw4NKJpIE4BdwWomkATy8SWn8I4MCBAwcOHDhw4MCBA3cawLcb1Jpoaz7b+be/OBsfNHDgwIEDBw4cOHDgwIErBcftF1qnQXv6/i3EreA+3ndw4MCBAwcOHDhw4MC9Hm5bfKYL2gbw9OJgeiGwPQCtfQYHDhw4cODAgQMHDhy4n+GYbvTpxk03MAVsFcbtgzA+AODAgQMHDhw4cODAgXs93LQQ3E6gXXzWgu2wqE0vCKZ/KHGRCg4cOHDgwIEDBw4cuF8Llz5gWoC2A/i2AJ0Wr9vgnwb5+OYEHDhw4MCBAwcOHDhwvx6uXSBug+u2+Gz9vJ1/us7jBhwcOHDgwIEDBw4cOHCvg7sNkBakrcDaKoBb60rnDw4cOHDgwIEDBw4cOHDpg7Yb8AnHtLhMC9btPNqFKzhw4MCBAwcOHDhw4MA9BfA0MKYQ20J1u+HpRraAxgcAHDhw4MCBAwcOHDhw4A4D9bRYbQXvadG6LV7b4NP9rd2cgAMHDhw4cODAgQMH7tfCTYvQNJifQqYBeHtBsA3I08+BAwcOHDhw4MCBAwcO3BYuLQrTYnEaXLdF6jbQbw/ytugFBw4cOHDgwIEDBw4cuJ/S+JRGWoBuD0AKNd2HKfjX9YIDBw4cOHDgwIEDB+71cO0AmxaarQuBNnQK3CqavwZwcODAgQMHDhw4cODAvR5uGjSnMNuAO93g9nzSi4HtQQEHDhw4cODAgQMHDhy4J7jWBJ+C5RQ8/XwL7E8XzODAgQMHDhw4cODAgQN3G2664NZzthvXKnzTAzZeFzhw4MCBAwcOHDhw4MCV4Y4LwcOFpgVuGqhb6zt973j/wYEDBw4cOHDgwIEDB65ULE4X2Aq825+nB+006KcH9/F94MCBAwcOHDhw4MCBA7f8wuZ0QacLTb8Y2ypi0wuB9N/jL8SCAwcOHDhw4MCBAwfudXDGvzXAgTPAGeDAGeAMcK8d/wH0qrvHzKOdBwAAAABJRU5ErkJggg==">
+          </div>
+        </div>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>411 words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>1 min</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/06/17/hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%BA%8C/'>
+                <p class='title'>'hexo博客美化二'<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>前面已经讲过hexo博客的美化，这是继续更新的。
+
+
+1.添加背景音乐打开网页版网易云音乐，选择你准备添加的背景音乐，点击生成外链播放器，前提是要有版权，不然是无法生成外链播放器的，复制底下的H...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: ''关于celery不执行定时任务的问题'',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- 右策兰页 -->
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper blur desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/celery/" href="/categories/celery/"
-            id="categoriescelery"
-            ><div class='name'>celery</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/django/" href="/categories/django/"
-            id="categoriesdjango"
-            ><div class='name'>django</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/git/" href="/categories/git/"
-            id="categoriesgit"
-            ><div class='name'>git</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/hexo/" href="/categories/hexo/"
-            id="categorieshexo"
-            ><div class='name'>hexo</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/redis/" href="/categories/redis/"
-            id="categoriesredis"
-            ><div class='name'>redis</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%8D%8F%E8%AE%AE/" href="/categories/%E5%8D%8F%E8%AE%AE/"
-            id="categoriesE58D8FE8AEAE"
-            ><div class='name'>协议</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/"
-            id="categoriesE58F88E68B8DE4BA91"
-            ><div class='name'>又拍云</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%94%AF%E4%BB%98/" href="/categories/%E6%94%AF%E4%BB%98/"
-            id="categoriesE694AFE4BB98"
-            ><div class='name'>支付</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#celery定时任务bug"><span class="toc-text">celery定时任务bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原因"><span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决思路"><span class="toc-text">解决思路</span></a></li></ol>
     </div>
   </section>
 
@@ -726,22 +783,20 @@
     
   
 
-  <section class="widget tagcloud blur desktop mobile">
+  <section class="widget related_posts blur desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
     
   </header>
 
 
-    <div class='content'>
-      <a href="/tags/celery/" style="font-size: 20px; color: #707070">celery</a> <a href="/tags/django/" style="font-size: 22px; color: #636363">django</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hexo/" style="font-size: 16px; color: #8b8b8b">hexo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2/" style="font-size: 14px; color: #999">hexo博客</a> <a href="/tags/id/" style="font-size: 14px; color: #999">id</a> <a href="/tags/js/" style="font-size: 16px; color: #8b8b8b">js</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/vue/" style="font-size: 18px; color: #7e7e7e">vue</a> <a href="/tags/%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #8b8b8b">协议</a> <a href="/tags/%E5%8F%88%E6%8B%8D%E4%BA%91/" style="font-size: 16px; color: #8b8b8b">又拍云</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 16px; color: #8b8b8b">异步</a> <a href="/tags/%E6%94%AF%E4%BB%98/" style="font-size: 16px; color: #8b8b8b">支付</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 14px; color: #999">状态码</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18px; color: #7e7e7e">算法</a> <a href="/tags/%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95/" style="font-size: 14px; color: #999">请求方法</a>
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery的定时任务\" title="'schedule的定时任务'" rel="bookmark">'schedule的定时任务'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery异步的使用\" title="'celery异步的使用'" rel="bookmark">'celery异步的使用'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\关于使用celery出现错误的问题\" title="'关于使用celery执行post请求出现启动服务错误的问题'" rel="bookmark">'关于使用celery执行post请求出现启动服务错误的问题'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-微博登录\" title="第三方登录-微博登录" rel="bookmark">第三方登录-微博登录</a></h3></div></li></ul>
     </div>
   </section>
 
-
-  
 
   
 
@@ -998,6 +1053,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "NXH07QqogzUxgT3WQU064j9D-gzGzoHsz",
+    appKey: "f5oGTt9f5pG96B9r6uTngiGh",
+    placeholder: "畅所欲言吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 

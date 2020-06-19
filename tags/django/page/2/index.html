@@ -6,6 +6,8 @@
   <!-- SEO相关 -->
   
     
+      <meta name="robots" content="noindex,follow">
+    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -17,11 +19,8 @@
 
   <!-- 页面元数据 -->
   
-    <title>&#39;关于使用selery出现错误的问题&#39; - WZH的博客</title>
+    <title>Tag: django - WZH的博客</title>
   
-  
-    <meta name="description" content="启动celery命令
-1celery worker -A celery_task -l info -P eventlet">
   
 
   <!-- feed -->
@@ -398,12 +397,19 @@
     <div class='body-wrapper'>
       
 
+
 <div class='l_main'>
   
-
-  
-    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+    
       
+  <section class="post-list ">
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
 
 
   <section class='meta'>
@@ -413,11 +419,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h1 class="title">
-    <a href="/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/">
-      '关于使用selery出现错误的问题'
+  <h2 class="title">
+    <a href="/2020/04/28/day08-%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-%E9%92%89%E9%92%89%E7%99%BB%E5%BD%95/">
+      '第三方登录-钉钉登录'
     </a>
-  </h1>
+  </h2>
 
 
         
@@ -438,6 +444,14 @@
           
             
               
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/django/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>django</p>
+    </a>
+  </div>
+
 
             
           
@@ -445,7 +459,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 1, 2020</p>
+    <p>发布于：Apr 28, 2020</p>
   </a>
 </div>
 
@@ -453,17 +467,10 @@
           
             
               
-
-            
-          
-            
-          
-            
-              
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>172 words</p>
+      <p>404 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -473,6 +480,11 @@
     </a>
   </div>
 
+
+            
+          
+            
+              
 
             
           
@@ -485,293 +497,347 @@
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          <p>启动celery命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">celery worker -A celery_task -l info -P eventlet</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p><img src="/img/celery/celery1.png" alt="selery"></p>
-<h3 id="在django中使用restful风格做开发时，发现都不能发送"><a href="#在django中使用restful风格做开发时，发现都不能发送" class="headerlink" title="在django中使用restful风格做开发时，发现都不能发送"></a>在django中使用restful风格做开发时，发现都不能发送</h3><p>在使用post方法的时候，因为我的celery后台一直是启动的，所以不运行task中封装的函数，<br>然后一直在找解决办法，于是我重启celery后台，会出现一个错误<br><img src="/img/celery/celery%E9%94%99%E8%AF%AF.png" alt="selery"></p>
-<p>该错误描述：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: wrap_socket() got an unexpected keyword argument <span class="string">'_context'</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="于是找了解决办法，换个启动命令"><a href="#于是找了解决办法，换个启动命令" class="headerlink" title="于是找了解决办法，换个启动命令"></a>于是找了解决办法，换个启动命令</h3><p>request包的request.post发送后，传不回数据</p>
-<p>所以，在改变服务器启动方法不要用eventlet，加个参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">celery worker -A mydjango -l info -P=solo</span><br></pre></td></tr></table></figure>
-
-
-<p>来源: Apical<br>转载于: <a href="https://www.sirxs.cn/2020/06/01/Note/celery_error/" target="_blank" rel="noopener">https://www.sirxs.cn/2020/06/01/Note/celery_error/</a></p>
-
-          
-            <div class='article_footer'>
-              
-                
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-<section class="widget copyright  desktop mobile">
-  <div class='content'>
-    
-      <blockquote>
-        
-          
-            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-          
-        
-          
-            <p>本文永久链接是：<a href=http://www.okwzh.cn/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/>http://www.okwzh.cn/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/</a></p>
-          
-        
-      </blockquote>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-<section class="widget qrcode  desktop mobile">
-  
-
-  <div class='content article-entry'>
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>钉钉企业注册：<a href="https://www.dingtalk.com/oasite/register_new.htm?source=1001&lwfrom=2017120202091367000000111#/" target="_blank" rel="noopener">点击跳转</a></p>
+<p>官方文档：<a href="https://ding-doc.dingtalk.com/doc#/serverapi2/kymkv6" target="_blank" rel="noopener">点击跳转</a></p>
+<p>悦哥钉钉登录博客：<a href="https://v3u.cn/a_id_124" target="_blank" rel="noopener">点击查看</a></p>
+      
+    </div>
     
       
-        <div class='fancybox'><img src='http://okwzh.cn/img/微信收款码.jpg'
-        
-          height='64px'
-        ></div>
-      
-    
-      
-        <div class='fancybox'><img src='http://okwzh.cn/img/支付宝收款码.jpg'
-        
-          height='64px'
-        ></div>
-      
-    
-  </div>
-</section>
-
-  
-
-
-              
-            </div>
-          
+        <div class="button readmore">
+          <a href="/2020/04/28/day08-%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-%E9%92%89%E9%92%89%E7%99%BB%E5%BD%95/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
         </div>
-        
-          
+      
+    
+  </section>
+</article>
 
-
-  <section class='meta' id="footer-meta">
-    <div class='new-meta-box'>
-      
-        
-      
-        
-          
-
-        
-      
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.okwzh.cn/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/&title='关于使用selery出现错误的问题' - WZH的博客&summary=启动celery命令
-1celery worker -A celery_task -l info -P eventlet"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
-          
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.okwzh.cn/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/&title='关于使用selery出现错误的问题' - WZH的博客&summary=启动celery命令
-1celery worker -A celery_task -l info -P eventlet"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://service.weibo.com/share/share.php?url=http://www.okwzh.cn/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/&title='关于使用selery出现错误的问题' - WZH的博客&summary=启动celery命令
-1celery worker -A celery_task -l info -P eventlet"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
-          
-        </a>
-      
-    
-      
-        
-        <div class='hoverbox'>
-          <a><img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/wechat.png"></a>
-          <div class='target'>
-            <img src="data:image/png;base64,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">
           </div>
-        </div>
+        
       
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
     
-  </div>
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2020/04/28/day08-%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-%E5%BE%AE%E5%8D%9A%E7%99%BB%E5%BD%95/">
+      第三方登录-微博登录
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://www.okwzh.cn" rel="nofollow">
+    <img src="https://okwzh.cn/1.jpg">
+    <p>Mr. W</p>
+  </a>
 </div>
 
-
-
-        
-      
-        
+            
           
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/django/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>django</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Apr 28, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>172 words</p>
+      <p>506 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>1 min</p>
+      <p>2 min</p>
     </a>
   </div>
 
 
+            
+          
+            
+              
+
+            
+          
+        </div>
         
-      
-    </div>
+          <hr>
+        
+      </div>
+    
   </section>
 
 
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/06/01/celery%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>'schedule的定时任务'</p>
-                <p class='content'>使用定时任务定时执行
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="微博登录思维导图"><a href="#微博登录思维导图" class="headerlink" title="微博登录思维导图"></a>微博登录思维导图</h3>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2020/04/28/day08-%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-%E5%BE%AE%E5%8D%9A%E7%99%BB%E5%BD%95/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
 
-
-启动定时任务命令
-12在和manage.py文件同级目录下：    celery -A  mydjango beat -l info
-注意：
-1234启动定时任务需要启...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/06/01/celery%E5%BC%82%E6%AD%A5%E7%9A%84%E4%BD%BF%E7%94%A8/'>
-                <p class='title'>'celery异步的使用'<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>使用celery异步需要的包
-1234使用的版本：    pip install django==2.0.4    pip install celery==4.4.2    pip instal...</p>
-              </a>
-            
           </div>
         
-      </section>
-    </article>
+      
+    
+  </section>
   
-
-  
-    <!-- 显示推荐文章和评论 -->
-
-
-
-  <article class="post white-box reveal comments shadow">
-    <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
-      
-      
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-          </div>
-        </section>
-      
-      
-    </section>
-  </article>
-
+    
+      <br>
+      <div class="prev-next">
+        
+          <a class="prev" rel="prev" href="/tags/django/">
+            <section class="post prev white-box shadow" >
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+            </section>
+          </a>
+        
+        <p class="current">
+          2 / 2
+        </p>
+        
+      </div>
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
 
   
 
 
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
-
-  <script>
-    window.subData = {
-      title: ''关于使用selery出现错误的问题'',
-      tools: true
-    }
-  </script>
-
-
+    
+  
 </div>
 <!-- 右策兰页 -->
 <aside class='l_side'>
   
   
+    
+    
+
+<section class="widget blogger blur desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box' href='/about/'>
+          <img no-lazy src='https://okwzh.cn/1.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>风也温柔</h2>
+        
+        
+        
+          <p><span id="jinrishici-sentence"><div id="binft"></div>
+            <script>
+              var binft = function (r) {
+                function t() {
+                  return b[Math.floor(Math.random() * b.length)]
+                }  
+                function e() {
+                  return String.fromCharCode(94 * Math.random() + 33)
+                }
+                function n(r) {
+                  for (var n = document.createDocumentFragment(), i = 0; r > i; i++) {
+                    var l = document.createElement("span");
+                    l.textContent = e(), l.style.color = t(), n.appendChild(l)
+                  }
+                  return n
+                }
+                function i() {
+                  var t = o[c.skillI];
+                  c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d)
+                }
+                var l = "",
+                o = ["云想衣裳花想容，春风拂槛露华浓。", "若非群玉山头见，会向瑶台月下逢","巧笑倩兮，美目盼兮，素以为绚兮。", "身无彩凤双飞翼，心有灵犀一点通。","青青子衿，悠悠我心。","桃之夭夭，灼灼其华。","醉后不知天在水，满船清梦压星河。","玲珑骰子安红豆，入骨相思知不知。"].map(function (r) {
+                return r + ""
+                }),
+                a = 2,
+                g = 1,
+                s = 5,
+                d = 75,
+                b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"],
+                c = {
+                  text: "",
+                  prefixP: -s,
+                  skillI: 0,
+                  skillP: 0,
+                  direction: "forward",
+                  delay: a,
+                  step: g
+                };
+                i()
+                };
+                binft(document.getElementById('binft'));
+            </script></span></p>
+          <!-- <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=1018653578&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:1018653578@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/Wzh3683"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/playlist?id=590228449"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
 
   
     
     
+  
 
-
-  <section class="widget toc-wrapper blur desktop mobile">
+  <section class="widget category blur desktop">
     
   <header>
     
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#在django中使用restful风格做开发时，发现都不能发送"><span class="toc-text">在django中使用restful风格做开发时，发现都不能发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#于是找了解决办法，换个启动命令"><span class="toc-text">于是找了解决办法，换个启动命令</span></a></li></ol>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/celery/" href="/categories/celery/"
+            id="categoriescelery"
+            ><div class='name'>celery</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/django/" href="/categories/django/"
+            id="categoriesdjango"
+            ><div class='name'>django</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/git/" href="/categories/git/"
+            id="categoriesgit"
+            ><div class='name'>git</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/hexo/" href="/categories/hexo/"
+            id="categorieshexo"
+            ><div class='name'>hexo</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/redis/" href="/categories/redis/"
+            id="categoriesredis"
+            ><div class='name'>redis</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%8D%8F%E8%AE%AE/" href="/categories/%E5%8D%8F%E8%AE%AE/"
+            id="categoriesE58D8FE8AEAE"
+            ><div class='name'>协议</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/"
+            id="categoriesE58F88E68B8DE4BA91"
+            ><div class='name'>又拍云</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%94%AF%E4%BB%98/" href="/categories/%E6%94%AF%E4%BB%98/"
+            id="categoriesE694AFE4BB98"
+            ><div class='name'>支付</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
     </div>
   </section>
 
@@ -783,20 +849,22 @@
     
   
 
-  <section class="widget related_posts blur desktop mobile">
+  <section class="widget tagcloud blur desktop mobile">
     
   <header>
     
-      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
     
   </header>
 
 
-    <div class="content">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\08\HTTP协议和HTTPS协议\" title="'HTTP协议和HTTPS协议'" rel="bookmark">'HTTP协议和HTTPS协议'</a></h3></div></li></ul>
+    <div class='content'>
+      <a href="/tags/celery/" style="font-size: 20px; color: #707070">celery</a> <a href="/tags/django/" style="font-size: 22px; color: #636363">django</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hexo/" style="font-size: 16px; color: #8b8b8b">hexo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2/" style="font-size: 14px; color: #999">hexo博客</a> <a href="/tags/id/" style="font-size: 14px; color: #999">id</a> <a href="/tags/js/" style="font-size: 16px; color: #8b8b8b">js</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/vue/" style="font-size: 18px; color: #7e7e7e">vue</a> <a href="/tags/%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #8b8b8b">协议</a> <a href="/tags/%E5%8F%88%E6%8B%8D%E4%BA%91/" style="font-size: 16px; color: #8b8b8b">又拍云</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 16px; color: #8b8b8b">异步</a> <a href="/tags/%E6%94%AF%E4%BB%98/" style="font-size: 16px; color: #8b8b8b">支付</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 14px; color: #999">状态码</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18px; color: #7e7e7e">算法</a> <a href="/tags/%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95/" style="font-size: 14px; color: #999">请求方法</a>
     </div>
   </section>
 
+
+  
 
   
 
@@ -1053,60 +1121,6 @@
 
 
 
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
-
-  
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var meta = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var REQUIRED_FIELDS = ['nick','mail','link'];
-  var requiredFields = 'nick,mail'.split(',').filter(function(item){
-    return REQUIRED_FIELDS.indexOf(item) > -1
-  });
-  var valine = new Valine();
-  function emoji(path, idx, ext) {
-      return path + "/" + path + "-" + idx + "." + ext;
-  }
-  var emojiMaps = {};
-  for (var i = 1; i <= 54; i++) {
-    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
-  }
-  for (var i = 1; i <= 101; i++) {
-    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
-  }
-  for (var i = 1; i <= 116; i++) {
-    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
-  }
-  for (var i = 1; i <= 125; i++) {
-    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
-  }
-  for (var i = 1; i <= 4; i++) {
-    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
-  }
-  valine.init({
-    el: '#valine_container',
-    meta: meta,
-    
-    appId: "NXH07QqogzUxgT3WQU064j9D-gzGzoHsz",
-    appKey: "f5oGTt9f5pG96B9r6uTngiGh",
-    placeholder: "畅所欲言吧~",
-    pageSize:'10',
-    avatar:'robohash',
-    lang:'zh-cn',
-    visitor: 'true',
-    highlight: 'true',
-    mathJax: 'false',
-    enableQQ: 'true',
-    requiredFields: requiredFields,
-    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
-    emojiMaps: emojiMaps
-  })
-  </script>
 
 
 

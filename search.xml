@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>&#39;关于celery不执行定时任务的问题&#39;</title>
+      <link href="/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。</p><a id="more"></a><h3 id="celery定时任务bug"><a href="#celery定时任务bug" class="headerlink" title="celery定时任务bug"></a>celery定时任务bug</h3><p>就是简单做celery定时任务时，我发现逻辑和代码并没有任何问题，但是就是不启动。<br>于是进行百度，刚开始说的是可能是celery版本的问题，但是发现并不是这个问题。</p><p>经过测试，我把crontab中的参数hour去掉，把minute设置每分钟，于是我发现每分钟都会执行。<br>所以可以确定是hour，也就是时区问题。但是机器上的时间和代码里面的时区都没有问题，那可能是celery本身的问题了。</p><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>默认celery的时区为UTC</p><h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>将celery定时任务设置为根据本地时区触发</p><p>默认celery的时区为UTC，如果要在django项目中将celery定时任务配置为根据本地时区触发，则需要修改</p><p>在settings.py中添加以下代码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CELERY_TIMEZONE=<span class="string">'Asia/Shanghai'</span></span><br><span class="line">CELERY_ENABLE_UTC=<span class="literal">False</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>定时任务代码附上</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定时任务</span></span><br><span class="line"><span class="comment">#导入celery定时模块</span></span><br><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> schedules</span><br><span class="line"><span class="comment">#导入时间模块</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CELERY_TIMEZONE=<span class="string">'Asia/Shanghai'</span></span><br><span class="line">CELERY_ENABLE_UTC=<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CELERY_BEAT_SCHEDULE = &#123;</span></span><br><span class="line"><span class="comment">#     #定义定时任务</span></span><br><span class="line"><span class="comment">#     'celery_datetime_work':&#123;</span></span><br><span class="line"><span class="comment">#         'task':'myapp.tasks.async_test',   #任务名称</span></span><br><span class="line"><span class="comment">#         'schedule':timedelta(seconds=60)</span></span><br><span class="line"><span class="comment">#     &#125;</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"></span><br><span class="line">CELERY_BEAT_SCHEDULE = &#123;</span><br><span class="line">    <span class="comment">#定义定时任务</span></span><br><span class="line">    <span class="string">'celery_datetime_work'</span>:&#123;</span><br><span class="line">        <span class="comment">#天气预报结合钉钉机器人</span></span><br><span class="line">        <span class="string">'task'</span>: <span class="string">'myapp.tasks.func'</span>, <span class="comment">#我的celery任务</span></span><br><span class="line">        <span class="comment">#定时任务每天8.30</span></span><br><span class="line">        <span class="string">'schedule'</span>: crontab(minute=<span class="string">'30'</span>,hour=<span class="number">8</span>),</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> celery </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> django </tag>
+            
+            <tag> celery </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>&#39;hexo博客美化二&#39;</title>
       <link href="/2020/06/17/hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%BA%8C/"/>
       <url>/2020/06/17/hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%BA%8C/</url>
@@ -45,9 +74,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
             <tag> 支付 </tag>
             
@@ -120,9 +149,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
             <tag> 支付 </tag>
             
@@ -324,9 +353,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
         </tags>
       
@@ -351,9 +380,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
         </tags>
       
@@ -519,8 +548,18 @@
         <content type="html"><![CDATA[<p>使用定时任务定时执行</p><a id="more"></a><p>启动定时任务命令</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在和manage.py文件同级目录下：</span><br><span class="line">    celery -A  mydjango beat -l info</span><br></pre></td></tr></table></figure><p>注意：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">启动定时任务需要启动三个服务</span><br><span class="line"><span class="number">1.</span>django后台服务：python manage.py runserver</span><br><span class="line"><span class="number">2.</span>selery后台服务：celery worker -A mydjango -l info -P eventlet</span><br><span class="line"><span class="number">3.</span>定时任务服务：celery -A  mydjango beat -l info</span><br></pre></td></tr></table></figure><h3 id="启动定时任务出现错误"><a href="#启动定时任务出现错误" class="headerlink" title="启动定时任务出现错误"></a>启动定时任务出现错误</h3><p><img src="/img/celery/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%94%99%E8%AF%AF.png" alt="定时任务错误"></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Pidfile (celerybeat.pid) already exists.</span><br><span class="line">Seems we<span class="string">'re already running? (pid: 29396)</span></span><br></pre></td></tr></table></figure><p>这个错误就是说启动服务的文件夹里有启动文件celerybeat.pid了，把他删掉就可以了，记得再次重启</p><h3 id="在settings中配置"><a href="#在settings中配置" class="headerlink" title="在settings中配置"></a>在settings中配置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定时任务</span></span><br><span class="line"><span class="comment">#导入celery定时模块</span></span><br><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"><span class="comment">#导入时间模块</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line">CELERY_BEAT_SCHEDULE = &#123;</span><br><span class="line">    <span class="comment">#定义定时任务</span></span><br><span class="line">    <span class="string">'celery_work'</span>:&#123;</span><br><span class="line">        <span class="string">'task'</span>:<span class="string">'myapp.tasks.async_test'</span>,   <span class="comment">#任务名称,解析字符串寻找</span></span><br><span class="line">        <span class="string">'schedule'</span>:timedelta(seconds=<span class="number">7200</span>)  <span class="comment">#定时时长</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/img/celery/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.png" alt="定时任务"></p><h3 id="结合Django使用一个小案例：每1分钟提交一次log文件"><a href="#结合Django使用一个小案例：每1分钟提交一次log文件" class="headerlink" title="结合Django使用一个小案例：每1分钟提交一次log文件"></a>结合Django使用一个小案例：每1分钟提交一次log文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">在settings配置</span><br><span class="line"><span class="comment">#定时任务</span></span><br><span class="line"><span class="comment">#导入celery定时模块</span></span><br><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"><span class="comment">#导入时间模块</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line">CELERY_BEAT_SCHEDULE = &#123;</span><br><span class="line">    <span class="comment">#定义定时任务</span></span><br><span class="line">    <span class="string">'celery_work'</span>:&#123;</span><br><span class="line">        <span class="string">'task'</span>:<span class="string">'myapp.tasks.async_test'</span>,   <span class="comment">#任务名称</span></span><br><span class="line">        <span class="string">'schedule'</span>:timedelta(seconds=<span class="number">60</span>)  <span class="comment">#定时时长，,1分钟</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">创建一个task.py文件</span><br><span class="line"><span class="keyword">from</span> celery.task <span class="keyword">import</span> task</span><br><span class="line"><span class="comment">#自定义异步任务</span></span><br><span class="line"><span class="meta">@task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_test</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'异步任务'</span>)</span><br><span class="line">    <span class="comment">#文件名</span></span><br><span class="line">    filename = <span class="string">'celeray.log'</span> </span><br><span class="line">    <span class="comment">#追加形式写入</span></span><br><span class="line">    <span class="keyword">with</span> open(filename,<span class="string">'a'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment">#写入文件时间</span></span><br><span class="line">        f.write(str(datetime.datetime.now())+<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'123123'</span></span><br></pre></td></tr></table></figure><p><img src="/img/celery/%E5%AE%9A%E6%97%B61%E5%88%86%E9%92%9F.png" alt="定时启动"><br><img src="/img/celery/log%E6%96%87%E4%BB%B6%E8%AE%B0%E5%BD%95%E6%97%B6%E9%97%B4.png" alt="log文件记录时间"></p>]]></content>
       
       
+      <categories>
+          
+          <category> celery </category>
+          
+      </categories>
+      
       
         <tags>
+            
+            <tag> python </tag>
+            
+            <tag> django </tag>
             
             <tag> celery </tag>
             
@@ -531,13 +570,29 @@
     
     
     <entry>
-      <title>&#39;关于使用selery出现错误的问题&#39;</title>
-      <link href="/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-      <url>/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8selery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      <title>&#39;关于使用celery执行post请求出现启动服务错误的问题&#39;</title>
+      <link href="/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8celery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2020/06/01/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8celery%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/</url>
       
         <content type="html"><![CDATA[<p>启动celery命令</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">celery worker -A celery_task -l info -P eventlet</span><br></pre></td></tr></table></figure><a id="more"></a><p><img src="/img/celery/celery1.png" alt="selery"></p><h3 id="在django中使用restful风格做开发时，发现都不能发送"><a href="#在django中使用restful风格做开发时，发现都不能发送" class="headerlink" title="在django中使用restful风格做开发时，发现都不能发送"></a>在django中使用restful风格做开发时，发现都不能发送</h3><p>在使用post方法的时候，因为我的celery后台一直是启动的，所以不运行task中封装的函数，<br>然后一直在找解决办法，于是我重启celery后台，会出现一个错误<br><img src="/img/celery/celery%E9%94%99%E8%AF%AF.png" alt="selery"></p><p>该错误描述：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: wrap_socket() got an unexpected keyword argument <span class="string">'_context'</span></span><br></pre></td></tr></table></figure><h3 id="于是找了解决办法，换个启动命令"><a href="#于是找了解决办法，换个启动命令" class="headerlink" title="于是找了解决办法，换个启动命令"></a>于是找了解决办法，换个启动命令</h3><p>request包的request.post发送后，传不回数据</p><p>所以，在改变服务器启动方法不要用eventlet，加个参数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">celery worker -A mydjango -l info -P=solo</span><br></pre></td></tr></table></figure><p>来源: Apical<br>转载于: <a href="https://www.sirxs.cn/2020/06/01/Note/celery_error/" target="_blank" rel="noopener">https://www.sirxs.cn/2020/06/01/Note/celery_error/</a></p>]]></content>
       
       
+      <categories>
+          
+          <category> celery </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> django </tag>
+            
+            <tag> celery </tag>
+            
+        </tags>
       
     </entry>
     
@@ -551,8 +606,18 @@
         <content type="html"><![CDATA[<p>使用celery异步需要的包</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用的版本：</span><br><span class="line">    pip install django==<span class="number">2.0</span><span class="number">.4</span></span><br><span class="line">    pip install celery==<span class="number">4.4</span><span class="number">.2</span></span><br><span class="line">    pip install eventlet==<span class="number">0.25</span><span class="number">.2</span></span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="django配置celery"><a href="#django配置celery" class="headerlink" title="django配置celery"></a>django配置celery</h2><h3 id="在settings中配置"><a href="#在settings中配置" class="headerlink" title="在settings中配置"></a>在settings中配置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#代理url，异步任务代理</span></span><br><span class="line">CELERY_BROKER_URL = <span class="string">'redis://localhost:6379/'</span></span><br><span class="line"><span class="comment">#保存结果</span></span><br><span class="line">CELERY_RESULT_BACKEND = <span class="string">'redis://localhost:6379/'</span></span><br><span class="line"><span class="comment">#保存类型格式，使用json</span></span><br><span class="line">CELERY_RESULT_SERIALIZER = <span class="string">'json'</span></span><br></pre></td></tr></table></figure><h3 id="在和settings同一级目录下，创建celery-py文件，进行配置文件，用来启动服务"><a href="#在和settings同一级目录下，创建celery-py文件，进行配置文件，用来启动服务" class="headerlink" title="在和settings同一级目录下，创建celery.py文件，进行配置文件，用来启动服务"></a>在和settings同一级目录下，创建celery.py文件，进行配置文件，用来启动服务</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import, unicode_literals</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置环境变量</span></span><br><span class="line">os.environ.setdefault(<span class="string">'DJANGO_SETTINGS_MODULE'</span>, <span class="string">'mydjango.settings'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册Celery的APP</span></span><br><span class="line">app = Celery(<span class="string">'mydjango'</span>)</span><br><span class="line"><span class="comment"># 绑定配置文件,声明命名空间,可以在电脑任何位置启动</span></span><br><span class="line">app.config_from_object(<span class="string">'django.conf:settings'</span>, namespace=<span class="string">'CELERY'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动发现各个app下的tasks.py文件</span></span><br><span class="line">app.autodiscover_tasks()</span><br></pre></td></tr></table></figure><h3 id="在和settings同一级目录下的init-py文件下，当启动服务，加载init-py文件配置"><a href="#在和settings同一级目录下的init-py文件下，当启动服务，加载init-py文件配置" class="headerlink" title="在和settings同一级目录下的init.py文件下，当启动服务，加载init.py文件配置"></a>在和settings同一级目录下的<strong>init</strong>.py文件下，当启动服务，加载<strong>init</strong>.py文件配置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import, unicode_literals</span><br><span class="line"><span class="keyword">from</span> .celery <span class="keyword">import</span> app <span class="keyword">as</span> celery_app</span><br><span class="line"></span><br><span class="line"><span class="comment">#导包</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment">#初始化</span></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br><span class="line"></span><br><span class="line"><span class="comment">#加载celery应用</span></span><br><span class="line">__all__ = [<span class="string">'celery_app'</span>]</span><br></pre></td></tr></table></figure><h3 id="在myapp文件夹下，创建一个tasks-py文件，自定义任务"><a href="#在myapp文件夹下，创建一个tasks-py文件，自定义任务" class="headerlink" title="在myapp文件夹下，创建一个tasks.py文件，自定义任务"></a>在myapp文件夹下，创建一个tasks.py文件，自定义任务</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery.task <span class="keyword">import</span> task</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#自定义异步任务</span></span><br><span class="line"><span class="comment">#实用装饰器声明是异步任务</span></span><br><span class="line"><span class="meta">@task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_test</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'异步任务'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'123123'</span></span><br></pre></td></tr></table></figure><h3 id="触发异步任务队列"><a href="#触发异步任务队列" class="headerlink" title="触发异步任务队列"></a>触发异步任务队列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#调用tasks异步</span></span><br><span class="line"><span class="keyword">from</span> myapp <span class="keyword">import</span> tasks</span><br><span class="line"><span class="comment">#触发异步任务视图</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">celery_test</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment">#使用delay()异步任务调用</span></span><br><span class="line">    res = tasks.async_test.delay()</span><br><span class="line">    <span class="keyword">return</span> JsonResponse(&#123;<span class="string">'task_id'</span>:res.task_id&#125;)</span><br></pre></td></tr></table></figure><h3 id="配置url"><a href="#配置url" class="headerlink" title="配置url"></a>配置url</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> myapp.views <span class="keyword">import</span> celery_test</span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment">#定义超链接路由</span></span><br><span class="line">    path(<span class="string">'celery_test/'</span>,celery_test),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h3 id="启动celery服务"><a href="#启动celery服务" class="headerlink" title="启动celery服务"></a>启动celery服务</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>先启动django服务：python manage.py runserver</span><br><span class="line"><span class="number">2.</span>在manage.py文件的同级目录下，启动celery服务</span><br><span class="line"><span class="number">3.</span>以协程方式启动服务命令：celery worker -A mydjango -l info -P eventlet</span><br></pre></td></tr></table></figure><p><img src="/img/celery/celery1.png" alt="selery"></p><h3 id="实例-做邮件发送使用celery"><a href="#实例-做邮件发送使用celery" class="headerlink" title="实例:做邮件发送使用celery"></a>实例:做邮件发送使用celery</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#task中：</span></span><br><span class="line"><span class="keyword">from</span> celery.task <span class="keyword">import</span> task</span><br><span class="line"><span class="keyword">from</span> mydjango.settings <span class="keyword">import</span> MY_MAIL,MY_PASS</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.utils <span class="keyword">import</span> formataddr</span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"></span><br><span class="line"><span class="meta">@task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mail</span><span class="params">(subject,content,mailaddr)</span>:</span></span><br><span class="line">    <span class="comment">#声明邮件对象</span></span><br><span class="line">    msg = MIMEText(content,<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="comment">#设置发送方对象</span></span><br><span class="line">    msg[<span class="string">'From'</span>] = formataddr([<span class="string">'在线教育平台'</span>,MY_MAIL])</span><br><span class="line">    <span class="comment">#设置收件方对象</span></span><br><span class="line">    msg[<span class="string">'To'</span>] = formataddr([<span class="string">'尊敬的客户'</span>,mailaddr])</span><br><span class="line">    <span class="comment">#设置标题</span></span><br><span class="line">    msg[<span class="string">'Subject'</span>] = subject</span><br><span class="line">    <span class="comment">#设置smtp服务器</span></span><br><span class="line">    server = smtplib.SMTP_SSL(<span class="string">'smtp.qq.com'</span>,<span class="number">465</span>)</span><br><span class="line">    <span class="comment">#登录邮箱</span></span><br><span class="line">    server.login(MY_MAIL,MY_PASS)</span><br><span class="line">    <span class="comment">#发送邮件</span></span><br><span class="line">    server.sendmail(MY_MAIL,[mailaddr],msg.as_string())</span><br><span class="line">    <span class="comment">#关闭smtp连接，节约系统资源</span></span><br><span class="line">    server.quit()<span class="comment">#退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#在视图中</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Register</span><span class="params">(APIView)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self,request)</span>:</span></span><br><span class="line">        email = request.data.get(<span class="string">'email'</span>)       <span class="comment">#获取前端用户邮件</span></span><br><span class="line">        subject = <span class="string">'亲爱的用户您好：,欢迎注册在线教育平台'</span>     <span class="comment">#邮件标题</span></span><br><span class="line">        yanzhengma = random.randint(<span class="number">1000</span>,<span class="number">9999</span>)</span><br><span class="line">        print(yanzhengma)      <span class="comment">#数字验证码</span></span><br><span class="line">        r.set(<span class="string">'email'</span>,yanzhengma,<span class="number">120</span>)               <span class="comment">#存到redis</span></span><br><span class="line">        print(<span class="number">123</span>,r.get(<span class="string">'email'</span>))</span><br><span class="line">        content = <span class="string">'欢迎注册在线教育平台，您的验证码是%s，请在2分钟内输入，失效请重新获取'</span> % yanzhengma</span><br><span class="line">        print(content)      <span class="comment">#邮件内容</span></span><br><span class="line">        mailaddr = email    <span class="comment">#给发送邮件</span></span><br><span class="line">        <span class="comment">#参数需要存放到delay(里)</span></span><br><span class="line">        send_email = tasks.mail.delay(subject, content, mailaddr)  <span class="comment">#异步发送邮件调用邮件</span></span><br><span class="line">        <span class="comment">#使用celery需要使用JsonResponse返回</span></span><br><span class="line">        <span class="keyword">return</span> JsonResponse(&#123;<span class="string">'code'</span>:<span class="number">200</span>,<span class="string">'yzm'</span>:yanzhengma,<span class="string">'send_email'</span>:send_email.task_id&#125;)</span><br></pre></td></tr></table></figure>]]></content>
       
       
+      <categories>
+          
+          <category> celery </category>
+          
+      </categories>
+      
       
         <tags>
+            
+            <tag> python </tag>
+            
+            <tag> django </tag>
             
             <tag> celery </tag>
             
@@ -598,9 +663,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
         </tags>
       
@@ -625,9 +690,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
         </tags>
       
@@ -652,9 +717,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
         </tags>
       
@@ -679,9 +744,9 @@
       
         <tags>
             
-            <tag> django </tag>
-            
             <tag> python </tag>
+            
+            <tag> django </tag>
             
         </tags>
       
