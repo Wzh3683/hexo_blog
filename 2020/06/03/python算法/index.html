@@ -439,6 +439,14 @@
           
             
               
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%AE%97%E6%B3%95/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>算法</p>
+    </a>
+  </div>
+
 
             
           
@@ -464,13 +472,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>113 words</p>
+      <p>596 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>1 min</p>
+      <p>2 min</p>
     </a>
   </div>
 
@@ -496,8 +504,14 @@
 
 
 <p>搜索是在一个项目集合中找到一个特定项目的算法过程。 </p>
-<p>常用排序算法：</p>
+<p>常用搜索算法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">顺序查找</span><br><span class="line">二分法查找（*****）</span><br><span class="line">二叉树查找</span><br><span class="line">哈希查找</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序(quick sort)的采用了<span class='p red'>分治</span>的策略。<br>分治策略：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题的解组合为原问题的解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#快速排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_func</span><span class="params">(list)</span>:</span></span><br><span class="line">	<span class="comment">#判断列表长度是一位的话，直接返回，不需要排序</span></span><br><span class="line">	<span class="keyword">if</span> len(list) &lt; <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> list</span><br><span class="line">	<span class="comment">#基准值，也就是随机变量， 从列表中随机选取一个元素</span></span><br><span class="line">	tmp = list[<span class="number">0</span>]</span><br><span class="line">	left = [x <span class="keyword">for</span> x <span class="keyword">in</span> list[<span class="number">1</span>:] <span class="keyword">if</span> x &lt;= tmp]<span class="comment">#小于等于基准值的元素组成的数组</span></span><br><span class="line">	print(left)</span><br><span class="line">	right = [x <span class="keyword">for</span> x <span class="keyword">in</span> list[<span class="number">1</span>:] <span class="keyword">if</span> x &gt; tmp]<span class="comment">#大于基准值的元素组成的数组</span></span><br><span class="line">	<span class="comment"># print(right)</span></span><br><span class="line">	<span class="keyword">return</span> quick_func(left) + [tmp] + quick_func(right) <span class="comment">#调用本身，递归</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">li = [<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">5</span>]</span><br><span class="line">print(quick_func(li))</span><br><span class="line"></span><br><span class="line"><span class="comment">#参考结果：</span></span><br><span class="line">    <span class="comment"># 随机 2 #第一次取出基准值</span></span><br><span class="line">    <span class="comment"># 左 [1]</span></span><br><span class="line">    <span class="comment"># 右 [4, 6, 3, 8, 5]</span></span><br><span class="line">    <span class="comment"># 随机 4    #第二次取出基准值</span></span><br><span class="line">    <span class="comment"># 左 [3]</span></span><br><span class="line">    <span class="comment"># 右 [6, 8, 5]</span></span><br><span class="line">    <span class="comment"># 随机 6  #第三次取出基准值</span></span><br><span class="line">    <span class="comment"># 左 [5]</span></span><br><span class="line">    <span class="comment"># 右 [8]</span></span><br><span class="line">    <span class="comment"># [1, 2, 3, 4, 5, 6, 8]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。<br>冒泡排序就是遍历数据，每次只与下一个数字比较，如果这两个数顺序不对，则与交换过来。<br>就上面那个问题来说，因为要升序排列，所以数字越大越排在后面。则两个数比较的时候，如果后一个数比当前数小，则顺序不对，要将这两个数交换。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(li)</span>:</span></span><br><span class="line">	cli = len(li)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(cli):<span class="comment">#遍历所有数组</span></span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(cli-i<span class="number">-1</span>):<span class="comment">#</span></span><br><span class="line">			<span class="keyword">if</span> li[j] &gt; li[j+<span class="number">1</span>]: <span class="comment">#比较相邻两个元素，判断大小交换位置</span></span><br><span class="line">				li[j],li[j+<span class="number">1</span>]=li[j+<span class="number">1</span>],li[j]</span><br><span class="line"></span><br><span class="line">li = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">0</span>]</span><br><span class="line">bubble_sort(li)</span><br><span class="line">print(li)     </span><br><span class="line"><span class="comment"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
           
             <div class='article_footer'>
               
@@ -658,13 +672,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>113 words</p>
+      <p>596 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>1 min</p>
+      <p>2 min</p>
     </a>
   </div>
 
@@ -751,6 +765,20 @@ Reids官网：https://redis.io/
     
 
 
+  <section class="widget toc-wrapper blur desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序"><span class="toc-text">快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-text">冒泡排序</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
@@ -769,7 +797,7 @@ Reids官网：https://redis.io/
 
 
     <div class="content">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\递归算法\" title="'递归算法'" rel="bookmark">'递归算法'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\14\雪花算法-snowflake\" title="'分布式ID雪花算法(snowflake)'" rel="bookmark">'分布式ID雪花算法(snowflake)'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery的定时任务\" title="'schedule的定时任务'" rel="bookmark">'schedule的定时任务'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery异步的使用\" title="'celery异步的使用'" rel="bookmark">'celery异步的使用'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\08\HTTP协议和HTTPS协议\" title="'HTTP协议和HTTPS协议'" rel="bookmark">'HTTP协议和HTTPS协议'</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\算法-斐波那契数列\" title="'算法-斐波那契数列'" rel="bookmark">'算法-斐波那契数列'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\03\递归算法\" title="'递归算法'" rel="bookmark">'递归算法'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\14\雪花算法-snowflake\" title="'分布式ID雪花算法(snowflake)'" rel="bookmark">'分布式ID雪花算法(snowflake)'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery异步的使用\" title="'celery异步的使用'" rel="bookmark">'celery异步的使用'</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -977,7 +1005,7 @@ Reids官网：https://redis.io/
 
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://i.loli.net/2020/06/14/7ByVIonvhLY4wD5.png", "https://i.loli.net/2020/06/14/ZavlF8PD92cR6VY.jpg", "https://i.loli.net/2020/06/14/3QqPzTfJ56aEOsY.jpg", "https://i.loli.net/2020/06/14/CiNtd3sGD5vpRnO.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

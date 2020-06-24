@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html>
+  
+<head hexo-theme='https://volantis.js.org/#牛逼'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>&#39;使用python结合钉钉配置开发自定义机器人&#39; - WZH的博客</title>
+  
+    <meta name="keywords" content="python,django,钉钉">
+  
+  
+    <meta name="description" content="之前使用钉钉做过三方登录,今天我们来说一下使用python结合钉钉做一个钉钉群自定义机器人。
+这个功能属于比较极客的功能，它可以将第三方服务的信息聚合到钉钉群中，实现信息的自动化同步，例如：通过聚合Github、Gitlab等源码管理服务，实现源码更新同步；通过聚合Trello、JIRA等项目协调服务，实现项目信...">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="WZH的博客">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur floatable">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            WZH <b><sup style='color:#3AA757'>牛逼</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=https://www.itrhx.com/box/
+                  
+                  
+                  
+                    id="https:wwwitrhxcombox"
+                  >
+                  <i class='fa fa-briefcase fa-fw'></i>百宝箱
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/comments/
+                  
+                  
+                  
+                    id="comments"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>留言板
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=https://www.itrhx.com/box/
+                  
+                  
+                  
+                    id="https:wwwitrhxcombox"
+                  >
+                  <i class='fa fa-briefcase fa-fw'></i>百宝箱
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/comments/
+                  
+                  
+                  
+                    id="comments"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>留言板
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/06/20/%E4%BD%BF%E7%94%A8python%E7%BB%93%E5%90%88%E9%92%89%E9%92%89%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%BA%E5%99%A8%E4%BA%BA/">
+      '使用python结合钉钉配置开发自定义机器人'
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://www.okwzh.cn" rel="nofollow">
+    <img src="https://okwzh.cn/1.jpg">
+    <p>Mr. W</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/python/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>python</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Jun 20, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>1.3k words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>5 min</p>
+    </a>
+  </div>
+
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>之前使用钉钉做过<a href="https://okwzh.cn/2020/04/28/day08-%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-%E9%92%89%E9%92%89%E7%99%BB%E5%BD%95/" target="_blank" rel="noopener">三方登录</a>,今天我们来说一下使用python结合钉钉做一个钉钉群自定义机器人。</p>
+<p>这个功能属于比较极客的功能，它可以将第三方服务的信息聚合到钉钉群中，实现信息的自动化同步，例如：通过聚合Github、Gitlab等源码管理服务，实现源码更新同步；通过聚合Trello、JIRA等项目协调服务，实现项目信息同步；同事，支持Webhook协议的自定义接入，支持更多可能性，例如：将运维报警提醒、自动化测试的结果报告提醒、工作、生活日程安排（上班打卡、下班吃饭、健身、读书、生日、纪念日…）等等的提醒，通过自定义机器人聚合到钉钉中。</p>
+<a id="more"></a>
+
+<p>过关于钉钉机器人网上的一些攻略年代都比较久远，代码很多都基于python2，为了与时俱进，我们尝试用python3.7来开发配置钉钉自定义机器人。</p>
+<p>查看机器人官方文档：<a href="https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq" target="_blank" rel="noopener">https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq</a><br>首先明确一点，钉钉自定义机器人早就不支持在手机端创建了，所以得使用你的pc端或者mac端的钉钉客户端</p>
+<h3 id="创建机器人"><a href="#创建机器人" class="headerlink" title="创建机器人"></a>创建机器人</h3><p>在需要机器人的聊天群界面，点击智能群助手(一个群可以添加6个自定义机器人，而且还得有管理员权限)</p>
+<p><img src="/img/python/%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BA1.png" alt="添加自定义机器人"></p>
+<p>我们选择添加机器人</p>
+<p><img src="/img/python/%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BA2.png" alt="添加自定义机器人"></p>
+<p>点进去发现好多机器人，各有各的功能，本次我们选择自定义机器人。</p>
+<p><img src="/img/python/%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BA3.png" alt="添加自定义机器人"></p>
+<p>钉钉的机器人基于webhook协议，webhook呢是一个api概念,是微服务api的使用范式之一,也被成为反向api,即前端不主动发送请求,完全由后端推送。<br>在添加机器人页面填写一些基本信息。</p>
+<p><img src="/img/python/%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BA4.png" alt="添加自定义机器人"></p>
+<p>需要注意的是，在安全设置一栏里，我们选择加签的方式来验证，在此说明一下，钉钉机器人的安全策略有三种，第一种是使用关键字，就是说你推送的消息里必须包含你创建机器人时定义的关键字，如果不包含就推送不了消息，第二种就是使用加密签名，第三种是定义几个ip源，非这些源的请求会被拒绝，综合来看还是第二种又安全又灵活。</p>
+<p><img src="/img/python/%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BA5.png" alt="添加自定义机器人"></p>
+<p>创建成功后，系统会分配给你一个webhook地址，这个地址需要保存一下，地址中有唯一的accesstoken</p>
+<p>这是我们的钉钉机器人已经添加完成了，于是我们要写入让他进行自动发送消息</p>
+<h3 id="使用机器人发送消息"><a href="#使用机器人发送消息" class="headerlink" title="使用机器人发送消息"></a>使用机器人发送消息</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入需要的模块</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">timestamp = str(round(time.time() * <span class="number">1000</span>))</span><br><span class="line">secret = <span class="string">'创建机器人的签名'</span></span><br><span class="line">secret_enc = secret.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">string_to_sign = <span class="string">'&#123;&#125;\n&#123;&#125;'</span>.format(timestamp, secret)</span><br><span class="line">string_to_sign_enc = string_to_sign.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()</span><br><span class="line">sign = urllib.parse.quote(base64.b64encode(hmac_code))</span><br><span class="line"><span class="comment"># print(timestamp)</span></span><br><span class="line"><span class="comment"># print(sign)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests,json   <span class="comment">#导入依赖库</span></span><br><span class="line">headers=&#123;<span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>&#125;   <span class="comment">#定义数据类型</span></span><br><span class="line">webhook = <span class="string">'你的webhook地址&amp;timestamp='</span>+timestamp+<span class="string">"&amp;sign="</span>+sign</span><br><span class="line"><span class="comment">#定义要发送的数据</span></span><br><span class="line"><span class="comment">#"at": &#123;"atMobiles": "['"+ mobile + "']"</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">"msgtype"</span>: <span class="string">"text"</span>,</span><br><span class="line">    <span class="string">"text"</span>: &#123;<span class="string">"content"</span>: <span class="string">'我是机器人,这是我发的第一条消息'</span>&#125;,</span><br><span class="line">    <span class="string">"isAtAll"</span>: <span class="literal">True</span>&#125;</span><br><span class="line">res = requests.post(webhook, data=json.dumps(data), headers=headers)   <span class="comment">#发送post请求</span></span><br><span class="line"></span><br><span class="line">print(res.text)</span><br></pre></td></tr></table></figure>
+
+<p>这是我们已经发现机器人可以推送消息了，看效果：<br><img src="/img/python/%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BA6.png" alt="机器人推送消息"></p>
+<h3 id="关于发送消息类型和数据格式"><a href="#关于发送消息类型和数据格式" class="headerlink" title="关于发送消息类型和数据格式"></a>关于发送消息类型和数据格式</h3><figure class="highlight js"><figcaption><span>文本格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"msgtype"</span>: <span class="string">"text"</span>,  <span class="comment">//文本</span></span><br><span class="line">    <span class="string">"text"</span>: &#123;</span><br><span class="line">        <span class="string">"content"</span>: <span class="string">"我就是我, 是不一样的烟火@156xxxx8827"</span> <span class="comment">//文本内容</span></span><br><span class="line">    &#125;, </span><br><span class="line">    <span class="string">"at"</span>: &#123;     <span class="comment">//艾特对象</span></span><br><span class="line">        <span class="string">"atMobiles"</span>: [</span><br><span class="line">            <span class="string">"156xxxx8827"</span>, </span><br><span class="line">            <span class="string">"189xxxx8325"</span></span><br><span class="line">        ], </span><br><span class="line">        <span class="string">"isAtAll"</span>: <span class="literal">false</span>    <span class="comment">//是否艾特所有人</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>link格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"msgtype"</span>: <span class="string">"link"</span>, </span><br><span class="line">    <span class="string">"link"</span>: &#123;</span><br><span class="line">        <span class="string">"text"</span>: <span class="string">"这个即将发布的新版本，创始人xx称它为红树林。而在此之前，每当面临重大升级，产品经理们都会取一个应景的代号，这一次，为什么是红树林"</span>, </span><br><span class="line">        <span class="string">"title"</span>: <span class="string">"时代的火车向前开"</span>, </span><br><span class="line">        <span class="string">"picUrl"</span>: <span class="string">""</span>, </span><br><span class="line">        <span class="string">"messageUrl"</span>: <span class="string">"https://www.dingtalk.com/s?__biz=MzA4NjMwMTA2Ng==&amp;mid=2650316842&amp;idx=1&amp;sn=60da3ea2b29f1dcc43a7c8e4a7c97a16&amp;scene=2&amp;srcid=09189AnRJEdIiWVaKltFzNTw&amp;from=timeline&amp;isappinstalled=0&amp;key=&amp;ascene=2&amp;uin=&amp;devicetype=android-23&amp;version=26031933&amp;nettype=WIFI"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>markdown类型</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     <span class="string">"msgtype"</span>: <span class="string">"markdown"</span>,</span><br><span class="line">     <span class="string">"markdown"</span>: &#123;</span><br><span class="line">         <span class="string">"title"</span>:<span class="string">"杭州天气"</span>,</span><br><span class="line">         <span class="string">"text"</span>: <span class="string">"#### 杭州天气 @150XXXXXXXX \n&gt; 9度，西北风1级，空气良89，相对温度73%\n&gt; ![screenshot](https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png)\n&gt; ###### 10点20分发布 [天气](https://www.dingalk.com) \n"</span></span><br><span class="line">     &#125;,</span><br><span class="line">      <span class="string">"at"</span>: &#123;</span><br><span class="line">          <span class="string">"atMobiles"</span>: [</span><br><span class="line">              <span class="string">"150XXXXXXXX"</span></span><br><span class="line">          ],</span><br><span class="line">          <span class="string">"isAtAll"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于类型还有多种及参数，点击<a href="https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/uKPlK" target="_blank" rel="noopener">https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/uKPlK</a>查看</p>
+<h3 id="检验失信信息"><a href="#检验失信信息" class="headerlink" title="检验失信信息"></a>检验失信信息</h3><p>针对上边选择设置的三种方式，至少设置其中一种，以进行安全保护。否则会校验不通过</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 消息内容中不包含任何关键词</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"errcode"</span>:<span class="number">310000</span>,</span><br><span class="line">  <span class="string">"errmsg"</span>:<span class="string">"keywords not in content"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// timestamp 无效</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"errcode"</span>:<span class="number">310000</span>,</span><br><span class="line">  <span class="string">"errmsg"</span>:<span class="string">"invalid timestamp"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 签名不匹配</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"errcode"</span>:<span class="number">310000</span>,</span><br><span class="line">  <span class="string">"errmsg"</span>:<span class="string">"sign not match"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IP地址不在白名单</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"errcode"</span>:<span class="number">310000</span>,</span><br><span class="line">  <span class="string">"errmsg"</span>:<span class="string">"ip X.X.X.X not in whitelist"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=http://www.okwzh.cn/2020/06/20/%E4%BD%BF%E7%94%A8python%E7%BB%93%E5%90%88%E9%92%89%E9%92%89%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%BA%E5%99%A8%E4%BA%BA/>http://www.okwzh.cn/2020/06/20/%E4%BD%BF%E7%94%A8python%E7%BB%93%E5%90%88%E9%92%89%E9%92%89%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%BA%E5%99%A8%E4%BA%BA/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='http://okwzh.cn/img/微信收款码.jpg'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='http://okwzh.cn/img/支付宝收款码.jpg'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/python/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>python</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/django/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E9%92%89%E9%92%89/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>钉钉</p></a></div>
+
+
+        
+      
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.okwzh.cn/2020/06/20/%E4%BD%BF%E7%94%A8python%E7%BB%93%E5%90%88%E9%92%89%E9%92%89%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%BA%E5%99%A8%E4%BA%BA/&title='使用python结合钉钉配置开发自定义机器人' - WZH的博客&summary=之前使用钉钉做过三方登录,今天我们来说一下使用python结合钉钉做一个钉钉群自定义机器人。
+这个功能属于比较极客的功能，它可以将第三方服务的信息聚合到钉钉群中，实现信息的自动化同步，例如：通过聚合Github、Gitlab等源码管理服务，实现源码更新同步；通过聚合Trello、JIRA等项目协调服务，实现项目信息同步；同事，支持Webhook协议的自定义接入，支持更多可能性，例如：将运维报警提醒、自动化测试的结果报告提醒、工作、生活日程安排（上班打卡、下班吃饭、健身、读书、生日、纪念日…）等等的提醒，通过自定义机器人聚合到钉钉中。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.okwzh.cn/2020/06/20/%E4%BD%BF%E7%94%A8python%E7%BB%93%E5%90%88%E9%92%89%E9%92%89%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%BA%E5%99%A8%E4%BA%BA/&title='使用python结合钉钉配置开发自定义机器人' - WZH的博客&summary=之前使用钉钉做过三方登录,今天我们来说一下使用python结合钉钉做一个钉钉群自定义机器人。
+这个功能属于比较极客的功能，它可以将第三方服务的信息聚合到钉钉群中，实现信息的自动化同步，例如：通过聚合Github、Gitlab等源码管理服务，实现源码更新同步；通过聚合Trello、JIRA等项目协调服务，实现项目信息同步；同事，支持Webhook协议的自定义接入，支持更多可能性，例如：将运维报警提醒、自动化测试的结果报告提醒、工作、生活日程安排（上班打卡、下班吃饭、健身、读书、生日、纪念日…）等等的提醒，通过自定义机器人聚合到钉钉中。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://www.okwzh.cn/2020/06/20/%E4%BD%BF%E7%94%A8python%E7%BB%93%E5%90%88%E9%92%89%E9%92%89%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%BA%E5%99%A8%E4%BA%BA/&title='使用python结合钉钉配置开发自定义机器人' - WZH的博客&summary=之前使用钉钉做过三方登录,今天我们来说一下使用python结合钉钉做一个钉钉群自定义机器人。
+这个功能属于比较极客的功能，它可以将第三方服务的信息聚合到钉钉群中，实现信息的自动化同步，例如：通过聚合Github、Gitlab等源码管理服务，实现源码更新同步；通过聚合Trello、JIRA等项目协调服务，实现项目信息同步；同事，支持Webhook协议的自定义接入，支持更多可能性，例如：将运维报警提醒、自动化测试的结果报告提醒、工作、生活日程安排（上班打卡、下班吃饭、健身、读书、生日、纪念日…）等等的提醒，通过自定义机器人聚合到钉钉中。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a><img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/wechat.png"></a>
+          <div class='target'>
+            <img src="data:image/png;base64,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">
+          </div>
+        </div>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>1.3k words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>5 min</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/06/20/%E7%BB%93%E5%90%88python%E5%AE%9E%E7%8E%B0%E6%94%AF%E4%BB%98%E5%AE%9D%E9%80%80%E6%AC%BE%E5%8A%9F%E8%83%BD/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>'结合python实现支付宝退款功能'</p>
+                <p class='content'>有支付就肯定有退款，当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，支付宝将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/06/19/%E5%85%B3%E4%BA%8Ecelery%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/'>
+                <p class='title'>'关于celery不执行定时任务的问题'<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>使用celery做定时任务时，出现一个错误，就是不执行定时任务。刚开始在在做测试时是每分钟测试，然后我发现并没有执行这个服务。于是在花费了定量时间，然后解决了这个bug。
+
+celery定时任务...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: ''使用python结合钉钉配置开发自定义机器人'',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- 右策兰页 -->
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper blur desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建机器人"><span class="toc-text">创建机器人</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用机器人发送消息"><span class="toc-text">使用机器人发送消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于发送消息类型和数据格式"><span class="toc-text">关于发送消息类型和数据格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检验失信信息"><span class="toc-text">检验失信信息</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts blur desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery异步的使用\" title="'celery异步的使用'" rel="bookmark">'celery异步的使用'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\01\celery的定时任务\" title="'schedule的定时任务'" rel="bookmark">'schedule的定时任务'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\04\28\day08-第三方登录-钉钉登录\" title="'第三方登录-钉钉登录'" rel="bookmark">'第三方登录-钉钉登录'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\05\08\day13-django中间件\" title="'Django中间件'" rel="bookmark">'Django中间件'</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2020\06\08\HTTP协议和HTTPS协议\" title="'HTTP协议和HTTPS协议'" rel="bookmark">'HTTP协议和HTTPS协议'</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+  
+</aside>
+
+
+  
+  
+  <footer class="clearfix">
+    <br><br>
+    <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409650841&auto=1&height=66"></iframe> -->
+    <!-- 背景音乐 -->
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#007FFF'
+      autoplay='autoplay'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='xiami'
+      type='playlist'
+      id='1193563910'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+      <br>
+        <br>
+        <!-- ############## 四个网址 ################## -->
+        <!-- <div class="social-wrapper">
+          
+            
+            
+              <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1018653578&amp;site=qq&amp;menu=yes"
+                class="social fab fa-qq flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="mailto:1018653578@qq.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="https://github.com/Wzh3683"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+            
+              <a href="https://music.163.com/#/playlist?id=590228449"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div> -->
+        <!-- 网站运行时间 -->
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        <script>
+            var now = new Date(); 
+            function createtime() { 
+                var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                now.setTime(now.getTime()+250); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+            } 
+        setInterval("createtime()",250);
+        </script>
+      
+    
+      
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://volantis.js.org/" target="_blank" class="codename">WZH</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+          <!-- ############# Copyright © 2017-2020 Mr. W ############# -->
+        <p><a href="http://okwzh.cn" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. W</a></p>
+
+        </div>
+      
+    
+      
+        
+      
+    
+  </footer>
+
+
+
+
+<script>setLoadingBarProgress(80);</script>
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "8000",
+            fade: "1300"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "8000",
+            fade: "1300"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "NXH07QqogzUxgT3WQU064j9D-gzGzoHsz",
+    appKey: "f5oGTt9f5pG96B9r6uTngiGh",
+    placeholder: "畅所欲言吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="/js/FunnyTitle.js"></script>
+<!-- 数字雨 -->
+<!-- <canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script> -->
+<!-- 点击显示爆炸效果 -->
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+<!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!-- 小地球仪 -->
+<!-- <script type="text/javascript" src="//rf.revolvermaps.com/0/0/2.js?i=5jygvgz9nkm&amp;m=3&amp;s=120&amp;c=baff00&amp;t=1" async="async"></script> -->
